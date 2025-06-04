@@ -10,7 +10,7 @@
 </head>
 <body>
 <!-- Header -->
-<header class="bg-dark py-3 border-bottom shadow-sm">
+<header class="py-3 border-bottom shadow-sm">
     <div class="container d-flex align-items-center justify-content-between">
         <!-- Logo -->
         <div class="logo-container me-3">
@@ -26,13 +26,13 @@
         <nav class="ms-3">
             <ul class="nav">
                 <li class="nav-item">
-                    <a class="nav-link fw-semibold" href="accueil.html">Accueil</a>
+                    <a class="nav-link text-dark fw-semibold" href="accueil.html">Accueil</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link fw-semibold" href="../recherche/recherche.html">Recherche</a>
+                    <a class="nav-link text-dark fw-semibold" href="../recherche/recherche.html">Recherche</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link fw-semibold" href="../carte/carte.html">Carte</a>
+                    <a class="nav-link text-dark fw-semibold" href="../carte/carte.html">Carte</a>
                 </li>
             </ul>
         </nav>
@@ -40,6 +40,11 @@
 </header>
 
 </br>
+<div>
+    <video autoplay muted loop>
+        <source src="../videos/installation1.mp4" type="video/mp4">
+    </video>
+</div>
 <h3 class="text-center">Nos ambitions</h3>
 
 <div class="d-flex justify-content-center">
@@ -88,32 +93,70 @@
         </div>
     </div>
 </div>
+    <div class="container text-center">
+        <h2 class="mb-4 fw-bold">Nos projets finalisés</h2>
 
-<h2 class="text-center">Nos projets finalisés</h2>
-<div class="mx-auto">
-    <div id="lecarrousel" class="carousel slide" data-bs-ride="carousel" data-bs-interval="2000">
-        <div class="carousel-inner">
-            <div class="carousel-item active">
-                <img src="../images/panneau1.jpg" alt="carousel 1" class="mx-auto w-50 d-block">
+        <div id="lecarrousel" class="carousel slide mx-auto shadow rounded" data-bs-ride="carousel" data-bs-interval="2000" style="max-width: 600px;">
+            <!-- Indicateurs -->
+            <div class="carousel-indicators">
+                <button type="button" data-bs-target="#lecarrousel" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+                <button type="button" data-bs-target="#lecarrousel" data-bs-slide-to="1" aria-label="Slide 2"></button>
+                <button type="button" data-bs-target="#lecarrousel" data-bs-slide-to="2" aria-label="Slide 3"></button>
+                <button type="button" data-bs-target="#lecarrousel" data-bs-slide-to="3" aria-label="Slide 4"></button>
+                <button type="button" data-bs-target="#lecarrousel" data-bs-slide-to="4" aria-label="Slide 5"></button>
+                <button type="button" data-bs-target="#lecarrousel" data-bs-slide-to="5" aria-label="Slide 6"></button>
             </div>
-            <div class="carousel-item">
-                <img src="../images/panneau2.jpg" alt="carousel 2" class="mx-auto w-50 d-block">
-            </div>
-            <div class="carousel-item">
-                <img src="../images/panneau3.jpg" alt="carousel 3" class="mx-auto w-50 d-block">
-            </div>
-            <div class="carousel-item">
-                <img src="../images/panneau4.jpg" alt="carousel 4" class="mx-auto w-50 d-block">
-            </div>
-            <div class="carousel-item">
-                <img src="../images/panneau5.jpg" alt="carousel 5" class="mx-auto w-50 d-block">
-            </div>
-            <div class="carousel-item">
-                <img src="../images/panneau6.jpg" alt="carousel 6" class="mx-auto w-50 d-block">
+
+            <!-- Slides -->
+            <div class="carousel-inner rounded">
+                <div class="carousel-item active">
+                    <img src="../images/panneau1.jpg" alt="carousel 1" class="d-block w-100 rounded">
+                </div>
+                <div class="carousel-item">
+                    <img src="../images/panneau2.jpg" alt="carousel 2" class="d-block w-100 rounded">
+                </div>
+                <div class="carousel-item">
+                    <img src="../images/panneau3.jpg" alt="carousel 3" class="d-block w-100 rounded">
+                </div>
+                <div class="carousel-item">
+                    <img src="../images/panneau4.jpg" alt="carousel 4" class="d-block w-100 rounded">
+                </div>
+                <div class="carousel-item">
+                    <img src="../images/panneau5.jpg" alt="carousel 5" class="d-block w-100 rounded">
+                </div>
+                <div class="carousel-item">
+                    <img src="../images/panneau6.jpg" alt="carousel 6" class="d-block w-100 rounded">
+                </div>
             </div>
         </div>
     </div>
-</div>
+
+
+
+<!--<div class="mx-auto">-->
+<!--    <div id="lecarrousel" class="carousel slide" data-bs-ride="carousel" data-bs-interval="2000">-->
+<!--        <div class="carousel-inner">-->
+<!--            <div class="carousel-item active">-->
+<!--                <img src="../images/panneau1.jpg" alt="carousel 1" class="mx-auto w-50 d-block">-->
+<!--            </div>-->
+<!--            <div class="carousel-item">-->
+<!--                <img src="../images/panneau2.jpg" alt="carousel 2" class="mx-auto w-50 d-block">-->
+<!--            </div>-->
+<!--            <div class="carousel-item">-->
+<!--                <img src="../images/panneau3.jpg" alt="carousel 3" class="mx-auto w-50 d-block">-->
+<!--            </div>-->
+<!--            <div class="carousel-item">-->
+<!--                <img src="../images/panneau4.jpg" alt="carousel 4" class="mx-auto w-50 d-block">-->
+<!--            </div>-->
+<!--            <div class="carousel-item">-->
+<!--                <img src="../images/panneau5.jpg" alt="carousel 5" class="mx-auto w-50 d-block">-->
+<!--            </div>-->
+<!--            <div class="carousel-item">-->
+<!--                <img src="../images/panneau6.jpg" alt="carousel 6" class="mx-auto w-50 d-block">-->
+<!--            </div>-->
+<!--        </div>-->
+<!--    </div>-->
+<!--</div>-->
 
 <!-- Footer -->
 <footer class="bg-dark text-white pt-5 pb-4 mt-5">
