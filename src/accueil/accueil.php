@@ -40,11 +40,14 @@
 </header>
 
 </br>
-<div>
-    <video autoplay muted loop>
-        <source src="../videos/installation1.mp4" type="video/mp4">
-    </video>
-</div>
+<!--<div class="container my-5">-->
+<!--    <div class="ratio ratio-16x9">-->
+<!--        <video autoplay muted loop class="object-fit-cover w-100 h-100">-->
+<!--            <source src="../videos/instalation1.mp4" type="video/mp4">-->
+<!--        </video>-->
+<!--    </div>-->
+<!--</div>-->
+
 <h3 class="text-center">Nos ambitions</h3>
 
 <div class="d-flex justify-content-center">
@@ -93,6 +96,61 @@
         </div>
     </div>
 </div>
+
+<section class="container my-5">
+    <h2 class="text-center mb-4 fw-bold">Notre entreprise en quelques chiffres</h2>
+
+    <div class="row g-4 justify-content-center">
+        <div class="col-6 col-md-4 col-lg-3 d-flex">
+            <div class="case text-center p-4 shadow rounded bg-light flex-fill d-flex flex-column justify-content-center">
+                <h3 class="mb-3">Nombre d'enregistrement</h3>
+                <p class="display-5 text-primary fw-bold mb-0">1250</p>
+            </div>
+        </div>
+
+        <div class="col-6 col-md-4 col-lg-3 d-flex">
+            <div class="case text-center p-4 shadow rounded bg-light flex-fill d-flex flex-column justify-content-center">
+                <h3 class="mb-3">Installation annuelle</h3>
+                <p class="display-5 text-primary fw-bold mb-0">450</p>
+            </div>
+        </div>
+
+        <div class="col-6 col-md-4 col-lg-3 d-flex">
+            <div class="case text-center p-4 shadow rounded bg-light flex-fill d-flex flex-column justify-content-center">
+                <h3 class="mb-3">Installation régionnale</h3>
+                <p class="display-5 text-primary fw-bold mb-0">30</p>
+            </div>
+        </div>
+
+        <div class="col-6 col-md-4 col-lg-3 d-flex">
+            <div class="case text-center p-4 shadow rounded bg-light flex-fill d-flex flex-column justify-content-center">
+                <h3 class="mb-3">Installation annuelle en région</h3>
+                <p class="display-5 text-primary fw-bold mb-0">200</p>
+            </div>
+        </div>
+
+        <div class="col-6 col-md-4 col-lg-3 d-flex">
+            <div class="case text-center p-4 shadow rounded bg-light flex-fill d-flex flex-column justify-content-center">
+                <h3 class="mb-3">Installateurs</h3>
+                <p class="display-5 text-primary fw-bold mb-0">75</p>
+            </div>
+        </div>
+
+        <div class="col-6 col-md-4 col-lg-3 d-flex">
+            <div class="case text-center p-4 shadow rounded bg-light flex-fill d-flex flex-column justify-content-center">
+                <h3 class="mb-3">Marques d'onduleurs</h3>
+                <p class="display-5 text-primary fw-bold mb-0">10</p>
+            </div>
+        </div>
+
+        <div class="col-6 col-md-4 col-lg-3 d-flex">
+            <div class="case text-center p-4 shadow rounded bg-light flex-fill d-flex flex-column justify-content-center">
+                <h3 class="mb-3">Marques panneaux solaires</h3>
+                <p class="display-5 text-primary fw-bold mb-0">12</p>
+            </div>
+        </div>
+    </div>
+</section>
     <div class="container text-center">
         <h2 class="mb-4 fw-bold">Nos projets finalisés</h2>
 
@@ -133,30 +191,6 @@
 
 
 
-<!--<div class="mx-auto">-->
-<!--    <div id="lecarrousel" class="carousel slide" data-bs-ride="carousel" data-bs-interval="2000">-->
-<!--        <div class="carousel-inner">-->
-<!--            <div class="carousel-item active">-->
-<!--                <img src="../images/panneau1.jpg" alt="carousel 1" class="mx-auto w-50 d-block">-->
-<!--            </div>-->
-<!--            <div class="carousel-item">-->
-<!--                <img src="../images/panneau2.jpg" alt="carousel 2" class="mx-auto w-50 d-block">-->
-<!--            </div>-->
-<!--            <div class="carousel-item">-->
-<!--                <img src="../images/panneau3.jpg" alt="carousel 3" class="mx-auto w-50 d-block">-->
-<!--            </div>-->
-<!--            <div class="carousel-item">-->
-<!--                <img src="../images/panneau4.jpg" alt="carousel 4" class="mx-auto w-50 d-block">-->
-<!--            </div>-->
-<!--            <div class="carousel-item">-->
-<!--                <img src="../images/panneau5.jpg" alt="carousel 5" class="mx-auto w-50 d-block">-->
-<!--            </div>-->
-<!--            <div class="carousel-item">-->
-<!--                <img src="../images/panneau6.jpg" alt="carousel 6" class="mx-auto w-50 d-block">-->
-<!--            </div>-->
-<!--        </div>-->
-<!--    </div>-->
-<!--</div>-->
 
 <!-- Footer -->
 <footer class="bg-dark text-white pt-5 pb-4 mt-5">

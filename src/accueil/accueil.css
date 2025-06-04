@@ -1,5 +1,8 @@
 body{
     background-color: black;
+    margin: 0;
+    padding: 0;
+    height: 100%;
 }
 
 .cadre{
@@ -23,4 +26,14 @@ header{
 }
 p{
     color: #1e7e34;
+}
+.case h3{
+    color: black;
+}
+.case p{
+    color: yellowgreen;
+}
+.case{
+    box-shadow: 10px 10px 20px yellow;
+
 }
