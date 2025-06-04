@@ -10,6 +10,11 @@ body{
     padding: 30px;
     background-color: white;
     box-shadow: 10px 10px 20px yellow;
+    transition: 0.5s;
+}
+
+.cadre:hover{
+    transform: translateY(-5px)
 }
 
 h1{
@@ -35,5 +40,5 @@ p{
 }
 .case{
     box-shadow: 10px 10px 20px yellow;
-
 }
+
