@@ -10,7 +10,7 @@
 <body>
 <!-- Header -->
 <?php
-include_once "header.html";
+include_once "../commun/header.html";
 ?>
 
 <!-- Info d'instalation -->
@@ -32,7 +32,7 @@ include_once "header.html";
 
 <!-- Footer -->
 <?php
-include_once "footer.html";
+include_once "../commun/footer.html";
 ?>
 </body>
 </html>

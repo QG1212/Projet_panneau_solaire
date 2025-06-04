@@ -14,7 +14,7 @@
 <body>
 <!-- Header -->
 <?php
-include_once "header.html";
+include_once "../commun/header.html";
 ?>
 
 <div class="container p-3">
@@ -54,7 +54,7 @@ include_once "header.html";
             </ul></div>
 
             <div class="row col-2 justify-content-md-center">
-                <div><button type="button" class="btn btn-success">Voir+</button></div>
+                <div><button type="button" class="btn btn-success" href="sous_page">Voir+</button></div>
             </div>
 </div></div></div></div>
 
@@ -66,7 +66,7 @@ include_once "header.html";
 
 <!-- Footer -->
 <?php
-include_once "footer.html";
+include_once "../commun/footer.html";
 ?>
 </body>
 </html>
