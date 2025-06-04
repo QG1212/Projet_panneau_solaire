@@ -10,29 +10,35 @@
 </head>
 <body>
 <!-- Header -->
-<header class="bg-light py-3 border-bottom shadow-sm">
+<header class="bg-dark py-3 border-bottom shadow-sm">
     <div class="container d-flex align-items-center justify-content-between">
         <!-- Logo -->
-        <div class="d-flex align-items-center">
-            <img src="../images/logo.png" alt="Logo" style="height: 50px;">
+        <div class="logo-container me-3">
+            <img src="../images/logo.png" class="w-50" alt="Logo">
         </div>
 
-        <!-- Navigation links -->
-        <nav>
+        <!-- Titre -->
+        <div class="text-center flex-grow-1">
+            <h1 class="m-0" id="titrepage">SUN-POWER</h1>
+        </div>
+
+        <!-- Navigation -->
+        <nav class="ms-3">
             <ul class="nav">
                 <li class="nav-item">
-                    <a class="nav-link text-dark fw-semibold" href="accueil.html">Accueil</a>
+                    <a class="nav-link fw-semibold" href="accueil.html">Accueil</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link text-dark fw-semibold" href="../recherche/recherche.html">Recherche</a>
+                    <a class="nav-link fw-semibold" href="../recherche/recherche.html">Recherche</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link text-dark fw-semibold" href="../carte/carte.html">Carte</a>
+                    <a class="nav-link fw-semibold" href="../carte/carte.html">Carte</a>
                 </li>
             </ul>
         </nav>
     </div>
 </header>
+
 </br>
 <h3 class="text-center">Nos ambitions</h3>
 
@@ -84,26 +90,26 @@
 </div>
 
 <h2 class="text-center">Nos projets finalisés</h2>
-<div class="container">
-    <div class="carousel slide" data-bs-ride="carousel">
+<div class="mx-auto">
+    <div id="lecarrousel" class="carousel slide" data-bs-ride="carousel" data-bs-interval="2000">
         <div class="carousel-inner">
             <div class="carousel-item active">
-                <img src="../images/panneau1.jpg" alt="carousel 1" class="d-block w-100">
+                <img src="../images/panneau1.jpg" alt="carousel 1" class="mx-auto w-50 d-block">
             </div>
             <div class="carousel-item">
-                <img src="../images/panneau2.jpg" alt="carousel 2" class="d-block w-100">
+                <img src="../images/panneau2.jpg" alt="carousel 2" class="mx-auto w-50 d-block">
             </div>
             <div class="carousel-item">
-                <img src="../images/panneau3.jpg" alt="carousel 3" class="d-block w-100">
+                <img src="../images/panneau3.jpg" alt="carousel 3" class="mx-auto w-50 d-block">
             </div>
             <div class="carousel-item">
-                <img src="../images/panneau4.jpg" alt="carousel 4" class="d-block w-100">
+                <img src="../images/panneau4.jpg" alt="carousel 4" class="mx-auto w-50 d-block">
             </div>
             <div class="carousel-item">
-                <img src="../images/panneau5.jpg" alt="carousel 5" class="d-block w-100">
+                <img src="../images/panneau5.jpg" alt="carousel 5" class="mx-auto w-50 d-block">
             </div>
             <div class="carousel-item">
-                <img src="../images/panneau6.jpg" alt="carousel 6" class="d-block w-100">
+                <img src="../images/panneau6.jpg" alt="carousel 6" class="mx-auto w-50 d-block">
             </div>
         </div>
     </div>

@@ -1,7 +1,21 @@
+body{
+    background-color: black;
+}
+
 .cadre{
-    border: 2px solid black;
     border-radius: 15px;
     padding: 30px;
-    background-color: darkgrey;
-    box-shadow: 10px 5px 5px black;
+    background-color: white;
+    box-shadow: 10px 10px 20px yellow;
 }
+
+h1{
+    color:yellowgreen;
+}
+h2{
+    color: yellowgreen;
+}
+h3{
+    color: yellowgreen;
+}
+
