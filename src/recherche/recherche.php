@@ -54,7 +54,7 @@ include_once "../commun/header.html";
             </ul></div>
 
             <div class="row col-2 justify-content-md-center">
-                <div><button type="button" class="btn btn-success" href="sous_page">Voir+</button></div>
+                <div><button type="button" class="btn btn-success" href="sous_page.php">Voir+</button></div>
             </div>
 </div></div></div></div>
 
