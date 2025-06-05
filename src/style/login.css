@@ -1,0 +1,30 @@
+#login {
+    box-shadow: 8px 8px 16px rgba(0, 0, 0, 0.2);
+    border-radius: 10px;
+    transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+}
+
+#login:hover {
+    transform: translateY(-5px);
+    box-shadow: 12px 12px 24px rgba(0, 0, 0, 0.3);
+}
+
+.login {
+    border: 1px solid #ffc107;
+    background-color: #ffc107;
+    color: white !important;
+    border-radius: 5px;
+    padding: 5px 20px;
+}
+
+.login:hover {
+    background-color: white;
+    color: #ffc107 !important;
+    text-decoration: none;
+}
+
+.back-link{
+    color : black;
+    margin-bottom: 10px;
+    font-size: 70%;
+}

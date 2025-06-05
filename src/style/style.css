@@ -1,0 +1,31 @@
+
+
+.login{
+    border: 1px solid #ffc107;
+    background-color: #ffc107;
+    color : white !important;
+    border-radius: 5px;
+    margin-left: 10px;
+    padding: 5px;
+}
+.login:hover{
+    background-color: white;
+    color : #ffc107 !important;
+    text-decoration: none;
+}
+
+.footer {
+    background-color: #001219;
+    color: white;
+    padding: 2rem 0;
+    text-align: center;
+}
+.footer a { color: white; }
+.active{
+    text-decoration: underline;
+    color : #ffc107 !important;
+}
+nav li a:hover{
+    color : #ffc107 !important;
+    text-decoration: underline;
+}

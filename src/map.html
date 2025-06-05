@@ -3,52 +3,52 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Page carte</title>
+  <title>Carte interactive - SunPower</title>
 
-  <!-- Bootstrap CSS -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/css/bootstrap.min.css" rel="stylesheet">
-
-  <!-- Bootstrap Icons -->
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css">
-
-  <!-- Leaflet CSS -->
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
 
+  <link rel="stylesheet" href="style/style.css">
+
   <style>
+    html, body {
+      height: 100%;
+      margin: 0;
+      display: flex;
+      flex-direction: column;
+    }
+    body > main {
+      flex: 1;
+    }
     #map {
       height: 500px;
-      width: 90%;
-    } 
-    .footer {
-      background-color: #001219;
-      color: white;
-      padding: 2rem 0;
-      text-align: center;
+      width: 100%;
+      border-radius: 8px;
     }
-    .footer a { color: white; }
-
-  
   </style>
 </head>
 <body>
 
- <!-- Header -->
-  <nav class="navbar navbar-expand-lg navbar-dark bg-success">
-    <div class="container">
-      <a class="navbar-brand" href="#">🌞 SunPower</a>
-      <div class="collapse navbar-collapse">
-        <ul class="navbar-nav ms-auto">
-          <li class="nav-item"><a class="nav-link" href="index.html">Accueil</a></li>
-          <li class="nav-item"><a class="nav-link" href="search.html">Recherche</a></li>
-          <li class="nav-item"><a class="nav-link active" href="map.html">Carte</a></li>
-        </ul>
-      </div>
-    </div>
-  </nav>
+<!-- Navbar -->
+<nav class="navbar navbar-expand-lg navbar-dark bg-success">
+  <div class="container">
+    <a class="navbar-brand" href="#">🌞 SunPower</a>
+    <div class="collapse navbar-collapse">
+      <ul class="navbar-nav ms-auto">
+        <li class="nav-item"><a class="nav-link" href="index.html">Accueil</a></li>
+        <li class="nav-item"><a class="nav-link" href="search.html">Recherche</a></li>
+        <li class="nav-item"><a class="nav-link active" href="map.html">Carte</a></li>
+        <li class="nav-item"><a class="nav-link login" href="login.html">Connexion</a></li>
 
-<!-- Section Carte et Sélecteurs -->
-<div class="container my-5">
-  <h2 class="mb-4">Carte interactive</h2>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<!-- Contenu principal -->
+<main class="container my-5">
+  <h2 class="mb-4">🗺 Carte interactive des installations</h2>
 
   <!-- Filtres -->
   <form class="row g-3 mb-3">
@@ -71,23 +71,29 @@
     </div>
   </form>
 
+  <!-- Bouton géolocalisation -->
+  <div class="mb-3">
+    <button class="btn btn-outline-primary" id="centerLocation">
+      📍 Me centrer sur ma position
+    </button>
+  </div>
+
   <!-- Carte -->
-  <div id="map"></div>
-</div>
+  <div id="map" class="mb-3"></div>
+</main>
 
 <!-- Footer -->
-  <footer class="footer">
-    <div class="container">
-      <p>© 2025 SunPower. Tous droits réservés. Réalisé par <a href="#">Maxime</a>, <a href="#">Quentin</a>, <a href="#">Lulu</a>.</p>
-    </div>
-  </footer>
+<footer class="footer">
+  <div class="container">
+    <p>© 2025 SunPower. Tous droits réservés. Réalisé par <a href="#">Maxime</a>, <a href="#">Quentin</a>, <a href="#">Lulu</a>.</p>
+  </div>
+</footer>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/js/bootstrap.bundle.min.js"></script>
-
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 
 <script>
-  const map = L.map('map').setView([48.8566, 2.3522], 11); // Paris par défaut
+  const map = L.map('map').setView([48.8566, 2.3522], 11); // Vue par défaut
 
   L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
     attribution: '&copy; OpenStreetMap contributors'
@@ -113,8 +119,30 @@
       }
 
       currentMarker = L.marker(coords).addTo(map)
-              .bindPopup("Commune : " + selected.charAt(0).toUpperCase() + selected.slice(1))
+              .bindPopup("📍 Commune : " + selected.charAt(0).toUpperCase() + selected.slice(1))
               .openPopup();
+    }
+  });
+
+  // Géolocalisation
+  document.getElementById('centerLocation').addEventListener('click', function () {
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(pos => {
+        const lat = pos.coords.latitude;
+        const lng = pos.coords.longitude;
+
+        map.setView([lat, lng], 13);
+
+        if (currentMarker) {
+          map.removeLayer(currentMarker);
+        }
+
+        currentMarker = L.marker([lat, lng]).addTo(map)
+                .bindPopup("📍 Vous êtes ici !")
+                .openPopup();
+      }, () => alert("Impossible de récupérer votre position."));
+    } else {
+      alert("La géolocalisation n'est pas supportée par ce navigateur.");
     }
   });
 </script>
