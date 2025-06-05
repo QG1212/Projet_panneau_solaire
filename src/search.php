@@ -1,3 +1,8 @@
+<?php
+    require 'Sql/database.php';
+    $conn = connexionDB();
+?>
+
 <!DOCTYPE html>
 <html lang="fr">
 <head>
@@ -7,33 +12,8 @@
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
 
   <link rel="stylesheet" href="style/style.css">
+    <link rel="stylesheet" href="style/search.css">
 
-  <style>
-    html, body {
-      height: 100%;
-      margin: 0;
-    }
-
-    body {
-      display: flex;
-      flex-direction: column;
-    }
-
-    main {
-      flex: 1;
-    }
-
-    .footer {
-      background-color: #001219;
-      color: white;
-      padding: 2rem 0;
-      text-align: center;
-    }
-
-    .footer a {
-      color: white;
-    }
-  </style>
 </head>
 <body>
 <!-- Header -->
@@ -71,9 +51,14 @@
         <div class="col-md-4">
           <label for="panneau" class="form-label">Marque des panneaux</label>
           <select class="form-select" id="panneau">
-            <option>Solaria</option>
-            <option>SunPower</option>
-            <option>REC</option>
+              <?php
+              $request = 'SELECT DISTINCT m.id, m.nom FROM Panneaux_Installe oi INNER JOIN Marques m ON m.id = oi.id_marque ORDER BY RAND() LIMIT 20';
+              $stmt = $conn->query($request);
+
+              while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+                  echo '<option value="' . htmlspecialchars($row['id']) . '">' . htmlspecialchars($row['nom']) . '</option>';
+              }
+              ?>
           </select>
         </div>
         <div class="col-md-4">

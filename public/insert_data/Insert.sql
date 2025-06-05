@@ -18,24 +18,21 @@ rientation, orientation_optimum, production_pvgis, lat, lon) SELECT DISTINCT  FR
  INSERT INTO Locality (code_insee, nom_commune, code_postal, id_reg, id_dep) SELECT      c.code_insee,     c.nom_standard,     c.code_postal,     r.id AS id_reg,     d.id AS id_dep FROM communes_2024 c JOIN Regions r ON c.reg_nom = r.reg_nom JOIN Departements d ON c.dep_nom = d.dep_nom;
 
 INSERT INTO Panneaux_Installe (id_installation, id_panneau, id_marque, nb)
-SELECT 
-    i.id AS id_installation,
+SELECT
     p.id AS id_panneau,
     m.id AS id_marque,
     d.nb_panneaux AS nb
 FROM data_2024 d
-JOIN Installation i ON d.lat = i.lat AND d.lon = i.lon
 JOIN Panneaux p ON d.panneaux_modele = p.modele
 JOIN Marques m ON d.panneaux_marque = m.nom;
 
-INSERT INTO Onduleur_Installe (id_installation, id_onduleur, id_marque, nb)
-SELECT 
-    i.id AS id_installation,
+INSERT INTO Onduleur_Installe (id_onduleur, id_marque, nb)
+SELECT
     o.id AS id_onduleur,
     m.id AS id_marque,
     d.nb_onduleur AS nb
 FROM data_2024 d
-JOIN Installation i ON d.lat = i.lat AND d.lon = i.lon
-JOIN Onduleur o ON d.onduleur_modele = o.modele
-JOIN Marques m ON d.onduleur_marque = m.nom;
+         JOIN Onduleur o ON d.onduleur_modele = o.modele
+         JOIN Marques m ON d.onduleur_marque = m.nom;
+
 
