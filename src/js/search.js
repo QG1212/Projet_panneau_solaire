@@ -31,6 +31,9 @@ function displayDepartements(departements){
 }
 
 document.addEventListener('DOMContentLoaded', () =>{
+    const onduleur = document.getElementById('onduleur').value;
+    const panneaux = document.getElementById('panneau').value;
+    const departements = document.getElementById('departement').value;
     ajaxRequest('GET', api_URL+'/onduleurs', displayOnduleur)
     ajaxRequest('GET', api_URL+'/panneaux', displayPanneaux)
     ajaxRequest('GET', api_URL+'/departements', displayDepartements)

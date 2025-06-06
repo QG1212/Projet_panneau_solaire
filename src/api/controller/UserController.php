@@ -7,68 +7,7 @@ require_once 'model/Departements.php';
 require_once 'config/database.php';
 
 class UserController {
-    public static function get20RandOnduleurs() {
-        header('Content-Type: application/json');
-        $db = connexionDB();
-        $data = Onduleurs::get20Rand($db);
-        echo json_encode($data);
-    }
 
-    public static function get20RandPanneaux() {
-        header('Content-Type: application/json');
-        $db = connexionDB();
-        $data = Panneaux::get20Rand($db);
-        echo json_encode($data);
-    }
-
-    public static function get20RandDepartements() {
-        header('Content-Type: application/json');
-        $db = connexionDB();
-        $data = Departements::get20Rand($db);
-        echo json_encode($data);
-    }
-
-    public static function nbInstallation() {
-        header('Content-Type: application/json');
-        $db = connexionDB();
-        $nb = Installations::getNb($db);
-        echo json_encode($nb);
-    }
-
-    public static function nbPanneaux() {
-        header('Content-Type: application/json');
-        $db = connexionDB();
-        $nb = Installations::getNb($db);
-        echo json_encode($nb);
-    }
-
-    public static function nbOnduleurs() {
-        header('Content-Type: application/json');
-        $db = connexionDB();
-        $nb = Onduleurs::getNb($db);
-        echo json_encode($nb);
-    }
-
-    public static function nbInstallateurs() {
-        header('Content-Type: application/json');
-        $db = connexionDB();
-        $nb = Installateurs::getNb($db);
-        echo json_encode($nb);
-    }
-
-    public static function nbInstallationAnnee() {
-        header('Content-Type: application/json');
-        $db = connexionDB();
-        $nb = Installations::getNbAnnee($db);
-        echo json_encode($nb);
-    }
-
-    public static function nbInstallationRegion() {
-        header('Content-Type: application/json');
-        $db = connexionDB();
-        $nb = Installations::getNbRegion($db);
-        echo json_encode($nb);
-    }
 }
 
 ?>
