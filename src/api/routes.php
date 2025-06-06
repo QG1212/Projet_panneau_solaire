@@ -9,7 +9,7 @@ require_once 'controller/InstallationsController.php';
 require_once 'controller/OnduleursController.php';
 require_once 'controller/PanneauxController.php';
 
-$routes = '/Projet_panneau_solaire/src/api/index.php';
+$routes = '/Github/Projet_panneau_solaire/src/api/index.php';
 
 Router::add('GET', $routes.'/onduleurs', ['OnduleursController', 'get20RandOnduleurs']);
 Router::add('GET', $routes.'/panneaux', ['PanneauxController', 'get20RandPanneaux']);
