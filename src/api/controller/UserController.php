@@ -1,6 +1,7 @@
 <?php
 require_once 'model/Onduleurs.php';
 require_once 'model/Panneaux.php';
+require_once 'model/Departements.php';
 
 
 require_once 'config/database.php';
@@ -9,15 +10,22 @@ class UserController {
     public static function get20RandOnduleurs() {
         header('Content-Type: application/json');
         $db = connexionDB();
-        $onduleurs = Onduleurs::get20Rand($db);
-        echo json_encode($onduleurs);
+        $data = Onduleurs::get20Rand($db);
+        echo json_encode($data);
     }
 
     public static function get20RandPanneaux() {
         header('Content-Type: application/json');
         $db = connexionDB();
-        $panneaux = Panneaux::get20Rand($db);
-        echo json_encode($panneaux);
+        $data = Panneaux::get20Rand($db);
+        echo json_encode($data);
+    }
+
+    public static function get20RandDepartements() {
+        header('Content-Type: application/json');
+        $db = connexionDB();
+        $data = Departements::get20Rand($db);
+        echo json_encode($data);
     }
 
     public static function nbInstallation() {
