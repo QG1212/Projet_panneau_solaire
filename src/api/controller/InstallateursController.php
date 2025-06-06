@@ -1,5 +1,8 @@
 <?php
 
+require_once 'model/Installateurs.php';
+require_once 'config/database.php';
+
 class InstallateursController
 {
     public static function nbInstallateurs() {

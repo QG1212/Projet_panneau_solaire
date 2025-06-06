@@ -1,5 +1,7 @@
 <?php
 require_once 'model/Panneaux.php';
+require_once 'config/database.php';
+
 class PanneauxController
 {
     public static function get20RandPanneaux() {
@@ -12,9 +14,7 @@ class PanneauxController
     public static function nbPanneaux() {
         header('Content-Type: application/json');
         $db = connexionDB();
-        $nb = Installations::getNb($db);
+        $nb = Panneaux::getNb($db);
         echo json_encode($nb);
     }
 }
-
-?>

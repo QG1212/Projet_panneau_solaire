@@ -6,15 +6,15 @@ class Installations {
     }
 
     public static function getNbAnnee($db) {
-        $stmt = $db->query("SELECT an_instalation AS year, COUNT(*) AS nb_installations FROM Installation 
-        GROUP BY an_instalation ORDER BY an_instalation;");
+        $stmt = $db->query("SELECT an_installation AS year, COUNT(*) AS nb_installations FROM Installation 
+        GROUP BY an_installation ORDER BY an_installation;");
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 
     public static function getNbRegion($db) {
-        $stmt = $db->query("SELECT r.reg_nom AS region, COUNT(*) AS nb_installations FROM Installation i 
-        JOIN Locality l ON i.code_insee = l.code_insee JOIN Regions r ON l.id = r.id 
-        GROUP BY i.an_instalation, r.reg_nom ORDER BY i.an_instalation, r.reg_nom;");
+        $stmt = $db->query("SELECT r.reg_nom AS region, SUM(1) AS nb_installations FROM Installation i
+        JOIN Locality l ON i.code_insee = l.code_insee JOIN Regions r ON l.id_reg = r.id
+        GROUP BY r.reg_nom ORDER BY r.reg_nom;");
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 }

@@ -11,7 +11,13 @@ function connexionDB() {
         ];
         return new PDO($dsn, DB_USER, DB_PWD, $options);
     } catch (PDOException $exception) {
-        error_log('Connection error: ' . $exception->getMessage());
-        return false;
+    error_log('Connection error: ' . $exception->getMessage());
+    
+    if ($_SERVER['SERVER_NAME'] === 'localhost') {
+        http_response_code(500);
+        echo json_encode(['error' => 'Database connection failed: ' . $exception->getMessage()]);
     }
+
+    return false;
+}
 }

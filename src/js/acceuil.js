@@ -3,14 +3,19 @@ const apiBase = './api/index.php';
 // Stat Numbers
 function fetchStat(endpoint, elementId) {
     $.getJSON(apiBase + endpoint).done(function(data) {
-        $('#' + elementId).text(data);                      //getElementById(-).innerHTML(-)
+        if (Array.isArray(data) && data.length > 0) {
+            const count = Object.values(data[0])[0];
+            $('#' + elementId).text(count);
+        } else {
+            $('#' + elementId).text('0');
+        }
     }).fail(function(jqXHR, textStatus, errorThrown) {
         console.error(`Error fetching ${endpoint}:`, textStatus, errorThrown);
         $('#' + elementId).text('Error');
     });
 }
 
-fetchStat('/nbInstallations', 'nbInstallation');
+fetchStat('/nbInstallation', 'nbInstallation');
 fetchStat('/nbInstallateurs', 'nbInstallateurs');
 fetchStat('/nbOnduleurs', 'nbOnduleurs');
 fetchStat('/nbPanneaux', 'nbPanneaux');
@@ -29,31 +34,32 @@ function fetchChartData() {
         url: apiBase + '/nbInstallationRegion',
         dataType: 'json'
     })).done(function(dataYear, dataRegion) {
-      // First element is the data response
         const yearData = dataYear[0];
         const regionData = dataRegion[0];
 
+        // ✅ Use correct key from API response
         const years = yearData.map(item => item.year);
-        const yearCounts = yearData.map(item => item.count);
+        const yearCounts = yearData.map(item => item.nb_installations);
 
         const regions = regionData.map(item => item.region);
-        const regionCounts = regionData.map(item => item.count);
+        const regionCounts = regionData.map(item => item.nb_installations); // Also fixed here if needed
 
-        // Destroy old charts if they exist
-        if(chartYear) chartYear.destroy();
-        if(chartRegion) chartRegion.destroy();
+        // Destroy old charts
+        if (chartYear) chartYear.destroy();
+        if (chartRegion) chartRegion.destroy();
 
         // Year Chart
         chartYear = new Chart(ctxYear, {
             type: 'bar',
             data: {
-              labels: years,
-              datasets: [{
-                label: 'Installations',
-                data: yearCounts,
-                backgroundColor: '#198754'
-            }]
-            }, options: {
+                labels: years,
+                datasets: [{
+                    label: 'Installations par année',
+                    data: yearCounts,
+                    backgroundColor: '#198754'
+                }]
+            },
+            options: {
                 responsive: true
             }
         });
@@ -64,17 +70,18 @@ function fetchChartData() {
             data: {
                 labels: regions,
                 datasets: [{
-                    label: 'Installations',
+                    label: 'Installations par région',
                     data: regionCounts,
                     backgroundColor: '#0d6efd'
                 }]
-            }, options: {
+            },
+            options: {
                 responsive: true
             }
         });
 
     }).fail(function(jqXHR, textStatus, errorThrown) {
-      console.error('Error loading chart data:', textStatus, errorThrown);
+        console.error('Error loading chart data:', textStatus, errorThrown);
     });
 }
 

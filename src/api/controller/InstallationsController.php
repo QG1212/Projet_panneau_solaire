@@ -1,5 +1,8 @@
 <?php
 
+require_once 'model/Installations.php';
+require_once 'config/database.php';
+
 class InstallationsController
 {
     public static function nbInstallation() {
