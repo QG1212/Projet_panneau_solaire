@@ -18,10 +18,10 @@ class Router {
             http_response_code(404);
             header('Content-Type: application/json');
             echo json_encode(["error" => "Route non trouvée"]);
+            var_dump(self::$routes); // pour voir les routes enregistrées
+            var_dump($this->method, $this->uri);
             return;
-
         }
-
         $callback = self::$routes[$this->method][$this->uri];
         call_user_func($callback);
     }

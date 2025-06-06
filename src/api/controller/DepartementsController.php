@@ -1,5 +1,4 @@
 <?php
-
 require_once 'model/Departements.php';
 require_once 'config/database.php';
 
