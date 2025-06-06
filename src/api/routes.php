@@ -13,7 +13,7 @@ $routes = '/Projet_panneau_solaire/src/api/index.php';
 
 Router::add('GET', $routes.'/onduleurs', ['OnduleursController', 'get20RandOnduleurs']);
 Router::add('GET', $routes.'/panneaux', ['PanneauxController', 'get20RandPanneaux']);
-Router::add('GET', $routes.'/localisation', ['DepartementsController', 'get20RandDepartements']);
+Router::add('GET', $routes.'/departements', ['DepartementsController', 'get20RandDepartements']);
 
 
 Router::add('GET', $routes.'/nbInstallation', ['InstallationsController', 'nbInstallation']);
@@ -22,3 +22,4 @@ Router::add('GET', $routes.'/nbOnduleurs', ['OnduleursController', 'nbOnduleurs'
 Router::add('GET', $routes.'/nbInstallateurs', ['InstallateursController', 'nbInstallateurs']);
 Router::add('GET', $routes.'/nbInstallationAnnee', ['InstallationsUserController', 'nbInstallationAnnee']);
 Router::add('GET', $routes.'/nbInstallationRegion', ['InstallationsController', 'nbInstallationRegion']);
+Router::add('GET', $routes.'/admin', ['UserController', 'getAdmin']);
