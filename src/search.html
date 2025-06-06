@@ -1,8 +1,3 @@
-<?php
-    require 'db/database.php';
-    $conn = connexionDB();
-?>
-
 <!DOCTYPE html>
 <html lang="fr">
 <head>
@@ -43,22 +38,11 @@
         <div class="col-md-4">
           <label for="onduleur" class="form-label">Marque de l'onduleur</label>
           <select class="form-select" id="onduleur">
-            <option>Victron Energy</option>
-            <option>SMA</option>
-            <option>Huawei</option>
           </select>
         </div>
         <div class="col-md-4">
           <label for="panneau" class="form-label">Marque des panneaux</label>
           <select class="form-select" id="panneau">
-              <?php
-              $request = 'SELECT DISTINCT m.id, m.nom FROM Panneaux_Installe oi INNER JOIN Marques m ON m.id = oi.id_marque ORDER BY RAND() LIMIT 20';
-              $stmt = $conn->query($request);
-
-              while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
-                  echo '<option value="' . htmlspecialchars($row['id']) . '">' . htmlspecialchars($row['nom']) . '</option>';
-              }
-              ?>
           </select>
         </div>
         <div class="col-md-4">

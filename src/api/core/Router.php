@@ -14,14 +14,15 @@ class Router {
     }
 
     public function resolve() {
-        $callback = self::$routes[$this->method][$this->uri];
-
-        if (!$callback) {
+        if (!isset(self::$routes[$this->method][$this->uri])) {
             http_response_code(404);
+            header('Content-Type: application/json');
             echo json_encode(["error" => "Route non trouvée"]);
             return;
+
         }
 
+        $callback = self::$routes[$this->method][$this->uri];
         call_user_func($callback);
     }
 }
