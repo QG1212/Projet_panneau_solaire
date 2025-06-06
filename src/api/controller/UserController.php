@@ -8,6 +8,7 @@ require_once 'model/Installateurs.php';
 require_once 'config/database.php';
 
 class UserController {
+<<<<<<< HEAD
     public static function get20RandOnduleurs() {
         header('Content-Type: application/json');
         $db = connexionDB();
@@ -63,6 +64,9 @@ class UserController {
         $nb = Installations::getNbRegion($db);
         echo json_encode($nb);
     }
+=======
+
+>>>>>>> 38c8b01d62537028d0232168001ab896c5c3fa57
 }
 
 ?>
