@@ -22,16 +22,22 @@
 }
 .footer a { color: white; }
 .active{
-    text-decoration: underline;
     color : #ffc107 !important;
 }
-nav li a:hover{
-    color : #ffc107 !important;
-    text-decoration: underline;
+nav li a {
+    border-radius: 5px;
+    padding: 5px 10px;
+    transition: all 0.2s ease-in-out;
 }
+
+nav li a:hover:not(.active) {
+    color: #ffc107 !important;
+    text-decoration: none;
+}
+
 
 .logo{
     width: 12%;
     height: 12%;
-    margin: 5%;
+    margin-right: 5%;
 }
