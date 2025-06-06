@@ -1,6 +1,8 @@
 <?php
 require_once 'model/Onduleurs.php';
 require_once 'model/Panneaux.php';
+require_once 'model/Installations.php';
+require_once 'model/Installateurs.php';
 
 
 require_once 'config/database.php';
