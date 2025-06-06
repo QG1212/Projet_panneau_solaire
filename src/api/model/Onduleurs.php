@@ -6,7 +6,7 @@ class Onduleurs {
     }
 
     public static function getNb($db) {
-        $stmt = $db->query("SELECT COUNT(*) FROM Onduleur;");
+        $stmt = $db->query("SELECT COUNT(*) as nbOnduleurs FROM Onduleur;");
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 }

@@ -1,7 +1,6 @@
 <?php
 require_once 'model/Onduleurs.php';
 require_once 'config/database.php';
-
 class OnduleursController
 {
     public static function get20RandOnduleurs() {

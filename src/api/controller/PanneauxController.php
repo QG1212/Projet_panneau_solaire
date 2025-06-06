@@ -1,7 +1,6 @@
 <?php
 require_once 'model/Panneaux.php';
 require_once 'config/database.php';
-
 class PanneauxController
 {
     public static function get20RandPanneaux() {
