@@ -1,6 +1,9 @@
 <?php
+require_once 'config/database.php';
+require_once 'model/Installations.php';
 
 class InstallationsController
+
 {
     public static function nbInstallation() {
         header('Content-Type: application/json');
