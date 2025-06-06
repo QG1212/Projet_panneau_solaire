@@ -8,4 +8,9 @@ Router::add('GET', $routes.'/onduleurs', ['UserController', 'get20RandOnduleurs'
 Router::add('GET', $routes.'/panneaux', ['UserController', 'get20RandPanneaux']);
 Router::add('GET', $routes.'/localisation', ['UserController', 'get20RandPanneaux']);
 
-?>
+Router::add('GET', $routes.'/nbInstallation', ['UserController', 'nbInstallation']);
+Router::add('GET', $routes.'/nbPanneaux', ['UserController', 'nbPanneaux']);
+Router::add('GET', $routes.'/nbOnduleurs', ['UserController', 'nbOnduleurs']);
+Router::add('GET', $routes.'/nbInstallateurs', ['UserController', 'nbInstallateurs']);
+Router::add('GET', $routes.'/nbInstallationAnnee', ['UserController', 'nbInstallationAnnee']);
+Router::add('GET', $routes.'/nbInstallationRegion', ['UserController', 'nbInstallationRegion']);
