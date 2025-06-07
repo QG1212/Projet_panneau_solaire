@@ -17,6 +17,7 @@ class Installations {
         GROUP BY r.reg_nom ORDER BY r.reg_nom;");
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
+
 }
 
 ?>

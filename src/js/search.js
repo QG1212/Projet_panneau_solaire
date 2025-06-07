@@ -27,6 +27,13 @@ function displayDepartements(departements){
     });
 }
 
+const search = document.getElementById('search')
+
+search.addEventListener('submit', event=>{
+   event.preventDefault();
+
+});
+
 document.addEventListener('DOMContentLoaded', () =>{
     const onduleur = document.getElementById('onduleur').value;
     const panneaux = document.getElementById('panneau').value;

@@ -1,25 +1,26 @@
-body {
+html, body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
     background-color: #f5f6f7;
     font-family: 'Segoe UI', sans-serif;
 }
-.card-header {
-    background: linear-gradient(to right, #0d8b2c, #1cbf4d);
-    color: white;
+
+.container {
+    flex: 1;
 }
-.icon { font-size: 1.2rem; margin-right: 8px; }
-.info-label { font-weight: bold; }
-.highlight {
-    color: #0d6efd;
-    font-size: 1.5rem;
-    font-weight: bold;
+
+
+body {
+    padding-top: 70px;
 }
-.back-link {
-    margin: 20px;
-    display: inline-block;
-    color: #0d8b2c;
-}
+
 #map {
     height: 300px;
     border-radius: 8px;
     margin-bottom: 1.5rem;
+    margin-top: 1.5rem;
+    width: 100%;
 }

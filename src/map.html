@@ -37,20 +37,15 @@
   <!-- Filtres -->
   <form class="row g-3 mb-3">
     <div class="col-md-6">
-      <label for="selectYear" class="form-label">Année</label>
-      <select id="selectYear" class="form-select">
-        <option selected disabled>Choisissez une année</option>
-        <option value="2024">2024</option>
-        <option value="2025">2025</option>
+      <label for="annee" class="form-label">Année</label>
+      <select id="annee" class="form-select">
+        <option value="0">--Choisissez une année--</option>
       </select>
     </div>
     <div class="col-md-6">
-      <label for="selectCommune" class="form-label">Commune</label>
-      <select id="selectCommune" class="form-select">
-        <option selected disabled>Choisissez une commune</option>
-        <option value="paris">Paris</option>
-        <option value="lyon">Lyon</option>
-        <option value="marseille">Marseille</option>
+      <label for="departement" class="form-label">Commune</label>
+      <select id="departement" class="form-select">
+        <option value="0">--Choisissez une commune--</option>
       </select>
     </div>
   </form>
@@ -77,38 +72,6 @@
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 
 <script>
-  const map = L.map('map').setView([48.8566, 2.3522], 11); // Vue par défaut
-
-  L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-    attribution: '&copy; OpenStreetMap contributors'
-  }).addTo(map);
-
-  const communes = {
-    paris: [48.8566, 2.3522],
-    lyon: [45.7640, 4.8357],
-    marseille: [43.2965, 5.3698]
-  };
-
-  let currentMarker = null;
-
-  document.getElementById('selectCommune').addEventListener('change', function () {
-    const selected = this.value;
-    const coords = communes[selected];
-
-    if (coords) {
-      map.setView(coords, 12);
-
-      if (currentMarker) {
-        map.removeLayer(currentMarker);
-      }
-
-      currentMarker = L.marker(coords).addTo(map)
-              .bindPopup("📍 Commune : " + selected.charAt(0).toUpperCase() + selected.slice(1))
-              .openPopup();
-    }
-  });
-
-  // Géolocalisation
   document.getElementById('centerLocation').addEventListener('click', function () {
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition(pos => {
@@ -131,5 +94,8 @@
   });
 </script>
 
+<script src="js/paramURL.js"></script>
+<script src="js/ajax.js"></script>
+<script src="js/map.js"></script>
 </body>
 </html>
