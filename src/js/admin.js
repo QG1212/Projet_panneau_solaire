@@ -1,4 +1,4 @@
-const api_URL = '/GitHub/Projet_panneau_solaire/src/api/index.php/installations';
+const api_URL = '/Projet_panneau_solaire/src/api/index.php';
 
 function displayInstallation(datas){
     let tbody = document.getElementById("res");
@@ -25,7 +25,7 @@ function displayInstallation(datas){
 }
 
 document.addEventListener('DOMContentLoaded', () =>{
-    ajaxRequest('GET', api_URL, displayInstallation)
+    ajaxRequest('GET', api_URL+'/installations', displayInstallation)
 })
 
 
