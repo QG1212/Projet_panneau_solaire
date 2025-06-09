@@ -24,3 +24,51 @@ body {
     margin-top: 1.5rem;
     width: 100%;
 }
+
+.stat-box {
+    border-radius: 16px;
+    padding: 24px;
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.stat-box:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+}
+
+.stat-title {
+    font-size: 1rem;
+    text-transform: uppercase;
+    opacity: 0.85;
+    margin-bottom: 4px;
+}
+
+.stat-value {
+    font-size: 2rem;
+    font-weight: 700;
+}
+
+.stat-icon {
+    font-size: 2.5rem;
+    opacity: 0.85;
+}
+
+/* Dégradés de fond */
+.bg-orange {
+    background: linear-gradient(135deg, #ff9800, #ffa726);
+}
+.bg-blue {
+    background: linear-gradient(135deg, #2196f3, #42a5f5);
+}
+.bg-purple {
+    background: linear-gradient(135deg, #8e24aa, #ba68c8);
+}
+.bg-green {
+    background: linear-gradient(135deg, #43a047, #66bb6a);
+}
+
