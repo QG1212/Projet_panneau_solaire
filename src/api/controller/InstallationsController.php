@@ -28,4 +28,21 @@ class InstallationsController
         $nb = Installations::getNbRegion($db);
         echo json_encode($nb);
     }
+
+    public static function searchInstallations() {
+        header('Content-Type: application/json');
+        $db = connexionDB();
+        $id_panneau = $_GET['id_panneau'];
+        $id_onduleur = $_GET['id_onduleur'];
+        $id_dep = $_GET['id_dep'];
+        $data = Installations::search($db, $id_panneau, $id_onduleur, $id_dep);
+        echo json_encode($data);
+    }
+
+    public static function getInstallations() {
+        header('Content-Type: application/json');
+        $db = connexionDB();
+        $data = Installations::getInstallations($db);
+        echo json_encode($data);
+    }
 }

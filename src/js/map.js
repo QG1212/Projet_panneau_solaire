@@ -62,7 +62,6 @@ function displayMap(communes) {
     });
 }
 
-// Fonction pour mettre à jour la carte selon les filtres
 function updateMap() {
     const id_dep = document.getElementById('departement').value;
     const annee = document.getElementById('annee').value;
@@ -71,6 +70,5 @@ function updateMap() {
     ajaxRequest('GET', url, displayMap);
 }
 
-// Événements sur les selects
 document.getElementById('departement').addEventListener('change', updateMap);
 document.getElementById('annee').addEventListener('change', updateMap);

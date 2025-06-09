@@ -25,3 +25,5 @@ Router::add('GET', $routes.'/nbInstallationAnnee', ['InstallationsController', '
 Router::add('GET', $routes.'/nbInstallationRegion', ['InstallationsController', 'nbInstallationRegion']);
 Router::add('GET', $routes.'/admin', ['UserController', 'getAdmin']);
 Router::add('GET', $routes.'/communes', ['CommunesController', 'getCommunes']);
+Router::add('GET', $routes.'/search', ['InstallationsController', 'searchInstallations']);
+Router::add('GET', $routes.'/installations', ['InstallationsController', 'getInstallations']);
