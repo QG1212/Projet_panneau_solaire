@@ -46,7 +46,8 @@ class Installations {
         INNER JOIN Panneaux_Installe pi ON pi.id = i.id_panneau 
         INNER JOIN Onduleur_Installe oi ON oi.id = i.id_onduleur 
         INNER JOIN Locality l ON l.code_insee = i.code_insee 
-        INNER JOIN Departements d ON l.id_dep = d.id 
+        INNER JOIN Departements d ON l.id_dep = d.id
+        LIMIT 20;
     ");
         $stmt->execute();
         return $stmt->fetchAll(PDO::FETCH_ASSOC);

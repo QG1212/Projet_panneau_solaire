@@ -15,9 +15,6 @@
       <a class="navbar-brand" href="#"> <img class="logo" src="./images/logo.png" alt="logo"> SunPower</a>
       <div class="collapse navbar-collapse">
         <ul class="navbar-nav ms-auto">
-          <li class="nav-item"><a class="nav-link active" href="#">Ajout</a></li>
-          <li class="nav-item"><a class="nav-link" href="modifier.html">Modifier</a></li>
-          <li class="nav-item"><a class="nav-link" href="supprimer.html">Supprimer</a></li>
           <li class="nav-item"><a class="nav-link" href="info.html">Info</a> </li>
           <li class="nav-item"><a class="nav-link login" href="login.html">Connexion</a></li>
         </ul>
@@ -33,16 +30,32 @@
       <div class="card p-4 mb-5 shadow-sm">
         <div class="row g-3">
           <div class="col-md-4">
-            <label for="onduleur" class="form-label">Marque de l'onduleur</label><br>
-            <input type="text" id="onduleur">
+            <label for="date" class="form-label">Date installation</label><br>
+            <input type="text" id="date">
           </div>
           <div class="col-md-4">
-            <label for="panneau" class="form-label">Marque des panneaux</label><br>
+            <label for="panneau" class="form-label">Nombre de panneaux</label><br>
             <input type="text" id="panneau">
           </div>
           <div class="col-md-4">
-            <label for="departement" class="form-label">Département</label>
-            <input type="text" class="form-control" id="departement" value="19">
+            <label for="ondulateur" class="form-label">Nombre d'ondulateurs</label><br>
+            <input type="text" id="ondulateur">
+          </div>
+          <div class="col-md-4">
+            <label for="surface" class="form-label">Surface</label><br>
+            <input type="text" id="surface">
+          </div>
+          <div class="col-md-4">
+            <label for="puissance" class="form-label">Puissance(KWP)</label><br>
+            <input type="text" id="puissance">
+          </div>
+          <div class="col-md-4">
+            <label for="localisation" class="form-label">Localisation</label><br>
+            <input type="text" id="localisation">
+          </div>
+          <div class="col-md-4">
+            <label for="action" class="form-label">Action</label><br>
+            <input type="text" id="action">
           </div>
         </div>
         <div class="mt-4 text-end">
@@ -50,7 +63,30 @@
           <button class="btn btn-light">Réinitialiser</button>
         </div>
       </div>
+      <div class="card p-4 shadow-sm">
+        <h5 class="mb-3">Résultats</h5>
+        <div class="table-responsive">
+          <table class="table">
+            <thead class="table-light">
+            <tr>
+              <th>DATE D'INSTALLATION</th>
+              <th>NOMBRE DE PANNEAUX</th>
+              <th>NOMBRE DE ONDULEUR</th>
+              <th>SURFACE (M²)</th>
+              <th>PUISSANCE CRÊTE (KWP)</th>
+              <th>LOCALISATION</th>
+              <th class="supprimer">SUPPRIMER</th>
+            </tr>
+            </thead>
+            <tbody id="res">
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
     </div>
   </main>
+<script src="js/ajax.js"></script>
+<script src="js/admin.js"></script>
 </body>
 </html>
