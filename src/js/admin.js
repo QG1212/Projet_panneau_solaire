@@ -1,6 +1,5 @@
 const api_URL = '/Projet_panneau_solaire/src/api/index.php';
 
-
 function displayInstallation(datas){
     let tbody = document.getElementById("res");
     tbody.innerHTML = ''; // Vide le tableau avant d’ajouter (important pour éviter duplication)
@@ -14,16 +13,34 @@ function displayInstallation(datas){
                 <td>${data.puissance_crete}</td>
                 <td>${data.nom_commune}</td>
                 <td>
-                    <a href="modifier.html" class="btn btn-primary btn-sm btn-modif-conso">
+                    <a href="modifier.html?id=${data.id_installation}" class="btn btn-primary btn-sm btn-modif">
                         <i class="bi bi-pencil-square"></i>
                     </a>
-                    <button class="btn btn-danger btn-sm btn-delete-conso">
+                    <button class="btn btn-danger btn-sm btn-delete" data-id="${data.id_installation}">
                         <i class="bi bi-trash"></i>
                     </button>
                 </td>
             </tr>
-        `
-    })
+        `;
+    });
+    attachDeleteHandlers(); // Attache les listeners après le rendu
+}
+
+function attachDeleteHandlers() {
+    const deleteButtons = document.querySelectorAll('.btn-delete');
+    deleteButtons.forEach(button => {
+        button.addEventListener('click', function() {
+            const id = this.dataset.id;
+            if (!id) return;
+
+            if(confirm("Voulez-vous vraiment supprimer cette installation ?")) {
+                ajaxRequest('DELETE', api_URL + `/delete-installation?id=${id}`, response => {
+                    showAlert('Installation supprimée avec succès !', 'success');
+                    ajaxRequest('GET', api_URL + '/installations', displayInstallation);
+                });
+            }
+        });
+    });
 }
 
 function displayOnduleur(onduleurs){
@@ -87,7 +104,6 @@ form.addEventListener('submit', event => {
     for (const [key, value] of formData.entries()) {
         params.append(key, value);
     }
-    console.log(params)
 
     ajaxRequest('POST', api_URL + '/ajouter-installation', response => {
         showAlert('Installation ajoutée avec succès !', 'success');

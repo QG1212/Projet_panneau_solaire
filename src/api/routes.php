@@ -38,11 +38,7 @@ Router::add('GET', $routes.'/randInstallateur', ['InstallateursController', 'get
 
 Router::add('POST', $routes.'/ajouter-installation', ['InstallationsController', 'addInstallation']);
 
-Router::add('PUT', $routes.'/modifier', ['User', 'dbModifyDate']);
-Router::add('PUT', $routes.'/modifier', ['User', 'dbModifyPanneau']);
-Router::add('PUT', $routes.'/modifier', ['User', 'dbModifyOnduleur']);
-Router::add('PUT', $routes.'/modifier', ['User', 'dbModifySurface']);
-Router::add('PUT', $routes.'/modifier', ['User', 'dbModifyLocalisation']);
-Router::add('PUT', $routes.'/modifier', ['User', 'dbModifyPuissance']);
+Router::add('PUT', $routes.'/update-installation', ['InstallationsController', 'updateInstallation']);
 
-Router::add('DELETE', $routes.'/supprimer', ['User', 'dbDelete']);
+Router::add('DELETE', $routes.'/delete-installation', ['InstallationsController', 'deleteInstallation']);
+

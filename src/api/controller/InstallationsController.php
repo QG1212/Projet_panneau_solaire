@@ -79,4 +79,79 @@ class InstallationsController
 
         Installations::ajout($db, $id_onduleur, $id_marqueOnduleur, $nb_Onduleur, $nb_Panneau, $id_panneau, $id_marquePanneau, $code_insee, $id_installateur, $mois_installation, $an_installation, $puissance_crete, $surface, $lat, $lon);
     }
+
+    public static function updateInstallation() {
+        header('Content-Type: application/json');
+
+        $db = connexionDB();
+
+        // Récupérer les données PUT JSON envoyées dans le body
+        $putData = file_get_contents("php://input");
+        $data = json_decode($putData, true);
+
+        if (!$data) {
+            echo json_encode(["error" => "Données PUT invalides ou manquantes"]);
+            http_response_code(400);
+            return;
+        }
+
+        $id_onduleur       = (int)($data['modeleO']);
+        $id_marqueOnduleur = (int)($data['marqueO']);
+        $nb_Onduleur       = (int)($data['onduleur']);
+
+        $nb_Panneau        = (int)($data['panneau']);
+        $id_panneau        = (int)($data['modeleP']);
+        $id_marquePanneau  = (int)($data['marqueP']);
+
+        $code_insee        = (string)($data['commune']);
+        $id_installateur   = (int)($data['installateur']);
+
+        $mois_installation = (int)($data['mois']);
+        $an_installation   = (int)($data['annee']);
+
+        $puissance_crete   = (int)($data['puissance']);
+        $surface           = (int)($data['surface']);
+
+        $lat               = 48.2;  // ou récupéré depuis $data si tu veux
+        $lon               = 1.5;
+
+        // Appelle ta méthode update avec les bons paramètres
+        Installations::update(
+            $db,
+            $data['id_onduleur_installe'] , // à récupérer côté client !
+            $data['id_panneaux_installe'] ,
+            $data['id_installation'] ,
+            $id_onduleur,
+            $id_marqueOnduleur,
+            $nb_Onduleur,
+            $nb_Panneau,
+            $id_panneau,
+            $id_marquePanneau,
+            $code_insee,
+            $id_installateur,
+            $mois_installation,
+            $an_installation,
+            $puissance_crete,
+            $surface,
+            $lat,
+            $lon
+        );
+    }
+
+    public static function deleteInstallation()
+    {
+        header('Content-Type: application/json');
+        $db = connexionDB();
+
+        $id = (int)$_GET['id'];
+
+        $result = Installations::delete($db, $id);
+
+        if ($result) {
+            echo json_encode(['success' => true, 'message' => 'Installation supprimée']);
+        } else {
+            echo json_encode(['success' => false, 'message' => 'Erreur lors de la suppression']);
+        }
+    }
+
 }

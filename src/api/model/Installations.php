@@ -134,6 +134,100 @@ class Installations {
         }
     }
 
+    public static function update(
+        $db,
+        $id_onduleur_installe,
+        $id_panneaux_installe,
+        $id_installation,
+        $id_onduleur,
+        $id_marqueOnduleur,
+        $nb_Onduleur,
+        $nb_Panneau,
+        $id_panneau,
+        $id_marquePanneau,
+        $code_insee,
+        $id_installateur,
+        $mois_installation,
+        $an_installation,
+        $puissance_crete,
+        $surface,
+        $lat,
+        $lon
+    ) {
+        try {
+            $db->beginTransaction();
+
+            // Update Onduleur_Installe
+            $stmt1 = $db->prepare("
+            UPDATE Onduleur_Installe 
+            SET id_onduleur = :id_onduleur, id_marque = :id_marque, nb = :nb 
+            WHERE id = :id
+        ");
+            $stmt1->bindValue(":id_onduleur", $id_onduleur, PDO::PARAM_INT);
+            $stmt1->bindValue(":id_marque", $id_marqueOnduleur, PDO::PARAM_INT);
+            $stmt1->bindValue(":nb", $nb_Onduleur, PDO::PARAM_INT);
+            $stmt1->bindValue(":id", $id_onduleur_installe, PDO::PARAM_INT);
+            $stmt1->execute();
+
+            // Update Panneaux_Installe
+            $stmt2 = $db->prepare("
+            UPDATE Panneaux_Installe 
+            SET id_panneau = :id_panneau, id_marque = :id_marque, nb = :nb 
+            WHERE id = :id
+        ");
+            $stmt2->bindValue(":id_panneau", $id_panneau, PDO::PARAM_INT);
+            $stmt2->bindValue(":id_marque", $id_marquePanneau, PDO::PARAM_INT);
+            $stmt2->bindValue(":nb", $nb_Panneau, PDO::PARAM_INT);
+            $stmt2->bindValue(":id", $id_panneaux_installe, PDO::PARAM_INT);
+            $stmt2->execute();
+
+            // Update Installation
+            $stmt3 = $db->prepare("
+            UPDATE Installation SET
+                code_insee = :code_insee,
+                id_installateur = :id_installateur,
+                id_panneau = :id_panneau,
+                id_onduleur = :id_onduleur,
+                mois_installation = :mois_installation,
+                an_installation = :an_installation,
+                puissance_crete = :puissance_crete,
+                surface = :surface,
+                pente = NULL,
+                pente_optimum = NULL,
+                orientation = NULL,
+                orientation_optimum = NULL,
+                production_pvgis = NULL,
+                lat = :lat,
+                lon = :lon
+            WHERE id = :id
+        ");
+            $stmt3->bindValue(":code_insee", $code_insee, PDO::PARAM_STR);
+            $stmt3->bindValue(":id_installateur", $id_installateur, PDO::PARAM_INT);
+            $stmt3->bindValue(":id_panneau", $id_panneaux_installe, PDO::PARAM_INT); // ici on passe l'id dans Panneaux_Installe
+            $stmt3->bindValue(":id_onduleur", $id_onduleur_installe, PDO::PARAM_INT);  // idem pour Onduleur_Installe
+            $stmt3->bindValue(":mois_installation", $mois_installation, PDO::PARAM_INT);
+            $stmt3->bindValue(":an_installation", $an_installation, PDO::PARAM_INT);
+            $stmt3->bindValue(":puissance_crete", $puissance_crete, PDO::PARAM_INT);
+            $stmt3->bindValue(":surface", $surface, PDO::PARAM_INT);
+            $stmt3->bindValue(":lat", $lat, PDO::PARAM_STR);
+            $stmt3->bindValue(":lon", $lon, PDO::PARAM_STR);
+            $stmt3->bindValue(":id", $id_installation, PDO::PARAM_INT);
+            $stmt3->execute();
+
+            $db->commit();
+            echo json_encode("Mise à jour réussie !");
+        } catch (Exception $e) {
+            $db->rollBack();
+            echo json_encode("Échec de la mise à jour : " . $e->getMessage());
+        }
+    }
+
+    public static function delete($db, $id){
+        $stmt = $db->prepare("DELETE FROM Installation WHERE id = :id");
+        $stmt->bindValue(":id", $id, PDO::PARAM_INT);
+        $stmt->execute();
+    }
+
 }
 
 
