@@ -7,6 +7,11 @@ class Panneaux
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 
+    public static function get20RandModele($db) {
+        $stmt = $db->query("SELECT DISTINCT p.id, p.modele FROM Panneaux_Installe pi INNER JOIN Panneaux p ON p.id = pi.id_marque ORDER BY RAND() LIMIT 20");
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
+
     public static function getNbPanneauInstalle($db, $id) {
         $stmt = $db->query("SELECT pi.nb from Marques m INNER JOIN Panneaux_Installe pi ON pi.id_marque = m.id WHERE pi.id_marque = ?");
         return $stmt->fetchAll(PDO::FETCH_ASSOC);

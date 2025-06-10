@@ -24,4 +24,11 @@ class OnduleursController
         $nb = Onduleurs::getMarqueOnduleur($db, $id_marque);
         echo json_encode($nb);
     }
+
+    public static function get20RandModele(){
+        header('Content-Type: application/json');
+        $db = connexionDB();
+        $data = Onduleurs::get20RandModele($db);
+        echo json_encode($data);
+    }
 }

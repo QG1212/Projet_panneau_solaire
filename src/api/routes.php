@@ -31,6 +31,12 @@ Router::add('GET', $routes.'/installations', ['InstallationsController', 'getIns
 Router::add('GET', $routes.'/installation', ['InstallationsController', 'getInstallationsbyId']);
 Router::add('GET', $routes.'/marqueOnduleur', ['OnduleursController', 'getMarqueOnduleur']);
 Router::add('GET', $routes.'/marquePanneau', ['PanneauxController', 'getMarquePanneau']);
+Router::add('GET', $routes.'/modelePanneau', ['PanneauxController', 'get20RandModele']);
+Router::add('GET', $routes.'/modeleOnduleur', ['OnduleursController', 'get20RandModele']);
+Router::add('GET', $routes.'/randCommunes', ['CommunesController', 'get20Rand']);
+Router::add('GET', $routes.'/randInstallateur', ['InstallateursController', 'get20Rand']);
+
+Router::add('POST', $routes.'/ajouter-installation', ['InstallationsController', 'addInstallation']);
 
 Router::add('PUT', $routes.'/modifier', ['User', 'dbModifyDate']);
 Router::add('PUT', $routes.'/modifier', ['User', 'dbModifyPanneau']);

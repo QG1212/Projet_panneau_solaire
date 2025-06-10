@@ -5,6 +5,11 @@ class Onduleurs {
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 
+    public static function get20RandModele($db) {
+        $stmt = $db->query("SELECT DISTINCT p.id, p.modele FROM Onduleur_Installe pi INNER JOIN Onduleur p ON p.id = pi.id_marque ORDER BY RAND() LIMIT 20");
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
+
     public static function getNb($db) {
         $stmt = $db->query("SELECT COUNT(*) as nbOnduleurs FROM Onduleur;");
         return $stmt->fetchAll(PDO::FETCH_ASSOC);

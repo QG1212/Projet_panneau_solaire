@@ -19,4 +19,11 @@ class Communes
 
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
+
+    public static function get20Rand($db) {
+        $sql = "SELECT * FROM Locality ORDER BY RAND() LIMIT 20";
+        $stmt = $db->prepare($sql);
+        $stmt->execute();
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
 }

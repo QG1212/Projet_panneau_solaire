@@ -8,6 +8,7 @@ function displayDetail(datas){
     const detail = document.getElementById('details');
     detail.innerHTML = '';
     datas.forEach( data =>{
+        document.querySelector('title').textContent = `Installation #${data.id_installation} - SunPower`;
        detail.innerHTML = `
         <div class="row g-4 mt-3">
     <div class="col-md-3">

@@ -1,7 +1,9 @@
-const api_URL = 'http://php.localhost/GitHub/Projet_panneau_solaire/src/api/index.php';
+const api_URL = '/Projet_panneau_solaire/src/api/index.php';
+
 
 function displayInstallation(datas){
     let tbody = document.getElementById("res");
+    tbody.innerHTML = ''; // Vide le tableau avant d’ajouter (important pour éviter duplication)
     datas.forEach(data => {
         tbody.innerHTML += `
             <tr>
@@ -11,9 +13,10 @@ function displayInstallation(datas){
                 <td>${data.surface}</td>
                 <td>${data.puissance_crete}</td>
                 <td>${data.nom_commune}</td>
-                <td><button class="btn btn-primary btn-sm btn-modif-conso">
+                <td>
+                    <a href="modifier.html" class="btn btn-primary btn-sm btn-modif-conso">
                         <i class="bi bi-pencil-square"></i>
-                    </button>
+                    </a>
                     <button class="btn btn-danger btn-sm btn-delete-conso">
                         <i class="bi bi-trash"></i>
                     </button>
@@ -23,39 +26,72 @@ function displayInstallation(datas){
     })
 }
 
+function displayOnduleur(onduleurs){
+    const div = document.getElementById('marqueO');
+    onduleurs.forEach(onduleur =>{
+        div.innerHTML += `<option value="${onduleur.id}">${onduleur.nom}</option>`;
+    });
+}
+
+function displayPanneaux(panneaux){
+    const div = document.getElementById('marqueP');
+    panneaux.forEach(panneau =>{
+        div.innerHTML += `<option value="${panneau.id}">${panneau.nom}</option>`;
+    });
+}
+
+function displayCommunes(communes){
+    const div = document.getElementById('commune');
+    communes.forEach(commune =>{
+        div.innerHTML += `<option value="${commune.code_insee}">${commune.nom_commune}</option>`;
+    });
+}
+
+function displayModeleOnduleur(onduleurs){
+    const div = document.getElementById('modeleO');
+    onduleurs.forEach(onduleur =>{
+        div.innerHTML += `<option value="${onduleur.id}">${onduleur.modele}</option>`;
+    });
+}
+function displayModelePanneau(panneaux){
+    const div = document.getElementById('modeleP');
+    panneaux.forEach(panneau =>{
+        div.innerHTML += `<option value="${panneau.id}">${panneau.modele}</option>`;
+    });
+}
+
+function displayModeleInstallateur(installateurs){
+    const div = document.getElementById('installateur');
+    installateurs.forEach(installateur =>{
+        div.innerHTML += `<option value="${installateur.id}">${installateur.nom}</option>`;
+    });
+}
+
 document.addEventListener('DOMContentLoaded', () =>{
-    ajaxRequest('GET', api_URL + '/installations', displayInstallation)
+    ajaxRequest('GET', api_URL + '/installations', displayInstallation);
+    ajaxRequest('GET', api_URL + '/onduleurs', displayOnduleur);
+    ajaxRequest('GET', api_URL + '/panneaux', displayPanneaux);
+    ajaxRequest('GET', api_URL + '/randCommunes', displayCommunes);
+    ajaxRequest('GET', api_URL + '/modeleOnduleur', displayModeleOnduleur);
+    ajaxRequest('GET', api_URL + '/modelePanneau', displayModelePanneau);
+    ajaxRequest('GET', api_URL + '/randInstallateur', displayModeleInstallateur);
 });
 
-function editInstallation(datas){
-    let modifier = document.getElementById("modifier")
-    modifier.addEventListener('click',() =>{
-        let date = document.getElementById("date").value
-        let panneau = document.getElementById("panneau").value;
-        let ondulateur = document.getElementById("ondulateur").value;
-        let surface = document.getElementById("surface").value;
-        let puissance = document.getElementById("puissance").value;
-        let localisation = document.getElementById("localisation").value;
-        let API = `http://php.localhost/GitHub/Projet_panneau_solaire/src/api/index.php/installations/${id}`;
-        let data = `date=${date}&panneau=${panneau}&ondulateur=${ondulateur}&surface=${surface}&puissance=${puissance}&localisation=${localisation}`;
-        ajaxRequest("PUT", API, modifier, data);
-    })
-}
+const form = document.getElementById('installationForm');
+form.addEventListener('submit', event => {
+    event.preventDefault();
 
-function modifier(datas){
-    showAlert("Inslatallation modifier", success)
-}
+    const formData = new FormData(form);
+    const params = new URLSearchParams();
 
-function deleteInsatallation(datas){
-    let supprimer = document.getElementById("supprimer");
-    elmt.addEventListener('click', ()=>{
-        let id = document.getElementById("id").value;
-        let API = `http://php.localhost/GitHub/Projet_panneau_solaire/src/api/index.php/installations/${id}`;
-        ajaxRequest("DELETE", API, supprimer);
-    })
-}
+    for (const [key, value] of formData.entries()) {
+        params.append(key, value);
+    }
+    console.log(params)
 
-function supprimer(datas){
-    showAlert("utilisateur supprimer", success);
-}
-
+    ajaxRequest('POST', api_URL + '/ajouter-installation', response => {
+        alert(response.message || 'Installation ajoutée avec succès !');
+        form.reset();
+        ajaxRequest('GET', api_URL + '/installations', displayInstallation);
+    }, params.toString());
+});

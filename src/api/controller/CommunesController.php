@@ -12,4 +12,12 @@ class CommunesController {
         $data = Communes::getCommunes($db, $id_dep, $annee);
         echo json_encode($data);
     }
+
+    public static function get20Rand() {
+        header('Content-Type: application/json');
+
+        $db = connexionDB();
+        $data = Communes::get20Rand($db);
+        echo json_encode($data);
+    }
 }

@@ -1,4 +1,4 @@
-const apiBase = './api/index.php';
+const apiBase = '/Projet_panneau_solaire/src/api/index.php';
 
 // Stat Numbers
 function fetchStat(endpoint, elementId) {

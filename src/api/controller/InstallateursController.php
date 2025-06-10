@@ -11,4 +11,11 @@ class InstallateursController
         $nb = Installateurs::getNb($db);
         echo json_encode($nb);
     }
+
+    public static function get20Rand() {
+        header('Content-Type: application/json');
+        $db = connexionDB();
+        $nb = Installateurs::get20Rand($db);
+        echo json_encode($nb);
+    }
 }

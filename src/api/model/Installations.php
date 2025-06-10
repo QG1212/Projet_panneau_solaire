@@ -94,6 +94,45 @@ class Installations {
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 
+    public static function ajout($db, $id_onduleur, $id_marqueOnduleur, $nb_Onduleur, $nb_Panneau, $id_panneau, $id_marquePanneau, $code_insee, $id_installateur, $mois_installation, $an_installation, $puissance_crete, $surface, $lat, $lon)
+    {
+        try {
+            $db->beginTransaction();
+
+            $stmt1 = $db->prepare("INSERT INTO Onduleur_Installe(id_onduleur, id_marque, nb) VALUES(:id_onduleur, :id_marque, :nb)");
+            $stmt1->bindValue(":id_onduleur", $id_onduleur, PDO::PARAM_INT);
+            $stmt1->bindValue(":id_marque", $id_marqueOnduleur, PDO::PARAM_INT);
+            $stmt1->bindValue(":nb", $nb_Onduleur, PDO::PARAM_INT);
+            $stmt1->execute();
+            $id1 = $db->lastInsertId();
+
+            $stmt2 = $db->prepare("INSERT INTO Panneaux_Installe(id_panneau, id_marque, nb) VALUES (:id_panneau, :id_marque, :nb)");
+            $stmt2->bindValue(":id_panneau", $id_panneau, PDO::PARAM_INT);
+            $stmt2->bindValue(":id_marque", $id_marquePanneau, PDO::PARAM_INT);
+            $stmt2->bindValue(":nb", $nb_Panneau, PDO::PARAM_INT);
+            $stmt2->execute();
+            $id2 = $db->lastInsertId();
+
+            $stmt3 = $db->prepare("INSERT INTO Installation(code_insee, id_installateur, id_panneau, id_onduleur, mois_installation, an_installation, puissance_crete, surface, pente, pente_optimum, orientation, orientation_optimum, production_pvgis, lat, lon) 
+                                    VALUES (:code_insee, :id_installateur, :id_panneau, :id_onduleur, :mois_installation, :an_installation, :puissance_crete, :surface, null, null, null, null, null, :lat, :lon)");
+            $stmt3->bindValue(":code_insee", $code_insee, PDO::PARAM_INT);
+            $stmt3->bindValue(":id_installateur", $id_installateur, PDO::PARAM_INT);
+            $stmt3->bindValue(":id_onduleur", $id1, PDO::PARAM_INT);
+            $stmt3->bindValue(":id_panneau", $id2, PDO::PARAM_INT);
+            $stmt3->bindValue(":mois_installation", $mois_installation, PDO::PARAM_INT);
+            $stmt3->bindValue(":an_installation", $an_installation, PDO::PARAM_INT);
+            $stmt3->bindValue(":puissance_crete", $puissance_crete, PDO::PARAM_INT);
+            $stmt3->bindValue(":surface", $surface, PDO::PARAM_INT);
+            $stmt3->bindValue(":lat", $lat, PDO::PARAM_STR);
+            $stmt3->bindValue(":lon", $lon, PDO::PARAM_STR);
+            $db->commit();
+            echo "Transaction réussie !";
+        } catch (Exception $e) {
+            $db->rollBack();
+            echo "Échec de la transaction : " . $e->getMessage();
+        }
+    }
+
 }
 
 
