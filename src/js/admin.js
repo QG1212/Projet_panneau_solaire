@@ -1,4 +1,4 @@
-const api_URL = '/Projet_panneau_solaire/src/api/index.php';
+const api_URL = 'http://php.localhost/GitHub/Projet_panneau_solaire/src/api/index.php';
 
 function displayInstallation(datas){
     let tbody = document.getElementById("res");
@@ -21,11 +21,41 @@ function displayInstallation(datas){
             </tr>
         `
     })
-
 }
 
 document.addEventListener('DOMContentLoaded', () =>{
-    ajaxRequest('GET', api_URL+'/installations', displayInstallation)
-})
+    ajaxRequest('GET', api_URL + '/installations', displayInstallation)
+});
 
+function editInstallation(datas){
+    let modifier = document.getElementById("modifier")
+    modifier.addEventListener('click',() =>{
+        let date = document.getElementById("date").value
+        let panneau = document.getElementById("panneau").value;
+        let ondulateur = document.getElementById("ondulateur").value;
+        let surface = document.getElementById("surface").value;
+        let puissance = document.getElementById("puissance").value;
+        let localisation = document.getElementById("localisation").value;
+        let API = `http://php.localhost/GitHub/Projet_panneau_solaire/src/api/index.php/installations/${id}`;
+        let data = `date=${date}&panneau=${panneau}&ondulateur=${ondulateur}&surface=${surface}&puissance=${puissance}&localisation=${localisation}`;
+        ajaxRequest("PUT", API, modifier, data);
+    })
+}
+
+function modifier(datas){
+    showAlert("Inslatallation modifier", success)
+}
+
+function deleteInsatallation(datas){
+    let supprimer = document.getElementById("supprimer");
+    elmt.addEventListener('click', ()=>{
+        let id = document.getElementById("id").value;
+        let API = `http://php.localhost/GitHub/Projet_panneau_solaire/src/api/index.php/installations/${id}`;
+        ajaxRequest("DELETE", API, supprimer);
+    })
+}
+
+function supprimer(datas){
+    showAlert("utilisateur supprimer", success);
+}
 
