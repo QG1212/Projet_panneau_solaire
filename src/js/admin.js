@@ -90,7 +90,7 @@ form.addEventListener('submit', event => {
     console.log(params)
 
     ajaxRequest('POST', api_URL + '/ajouter-installation', response => {
-        alert(response.message || 'Installation ajoutée avec succès !');
+        showAlert('Installation ajoutée avec succès !', 'success');
         form.reset();
         ajaxRequest('GET', api_URL + '/installations', displayInstallation);
     }, params.toString());

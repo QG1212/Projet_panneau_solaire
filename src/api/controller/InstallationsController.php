@@ -57,28 +57,26 @@ class InstallationsController
     public static function addInstallation() {
         header('Content-Type: application/json');
         $db = connexionDB();
-        $id_onduleur        = $_POST['modeleO'];
-        $id_marqueOnduleur  = $_POST['marqueO'];
-        $nb_Onduleur        = $_POST['onduleur'];
+        $id_onduleur        = (int)$_POST['modeleO'];
+        $id_marqueOnduleur  = (int)$_POST['marqueO'];
+        $nb_Onduleur        = (int)$_POST['onduleur'];
 
-        $nb_Panneau         = $_POST['panneau'];
-        $id_panneau         = $_POST['modeleP'];
-        $id_marquePanneau   = $_POST['marqueP'];
+        $nb_Panneau         = (int)$_POST['panneau'];
+        $id_panneau         = (int)$_POST['modeleP'];
+        $id_marquePanneau   = (int)$_POST['marqueP'];
 
-        $code_insee         = $_POST['commune'];
-        $id_installateur = $_POST['installateur'];
+        $code_insee         = (string)$_POST['commune'];
+        $id_installateur = (int)$_POST['installateur'];
 
-        $mois_installation  = $_POST['mois'];
-        $an_installation    = $_POST['annee'];
+        $mois_installation  = (int)$_POST['mois'];
+        $an_installation    = (int)$_POST['annee'];
 
-        $puissance_crete    = $_POST['puissance'];
-        $surface            = $_POST['surface'];
+        $puissance_crete    = (int)$_POST['puissance'];
+        $surface            = (int)$_POST['surface'];
 
         $lat                = 48.2;
         $lon                = 1.5;
 
         Installations::ajout($db, $id_onduleur, $id_marqueOnduleur, $nb_Onduleur, $nb_Panneau, $id_panneau, $id_marquePanneau, $code_insee, $id_installateur, $mois_installation, $an_installation, $puissance_crete, $surface, $lat, $lon);
-
-        exit();
     }
 }

@@ -125,11 +125,12 @@ class Installations {
             $stmt3->bindValue(":surface", $surface, PDO::PARAM_INT);
             $stmt3->bindValue(":lat", $lat, PDO::PARAM_STR);
             $stmt3->bindValue(":lon", $lon, PDO::PARAM_STR);
+            $stmt3->execute();
             $db->commit();
-            echo "Transaction réussie !";
+            echo json_encode("Transaction réussie !");
         } catch (Exception $e) {
             $db->rollBack();
-            echo "Échec de la transaction : " . $e->getMessage();
+            echo json_encode("Échec de la transaction : " . $e->getMessage());
         }
     }
 
