@@ -13,7 +13,7 @@ CREATE TABLE Departements (
 -- Table: Locality
 CREATE TABLE Locality (
     code_insee VARCHAR(6) PRIMARY KEY,
-    locality_nom CHAR(32) NOT NULL,
+    nom_commune CHAR(32) NOT NULL,
     code_postal INT NOT NULL,
     id_reg INT NOT NULL,
     id_dep INT NOT NULL,
@@ -40,9 +40,14 @@ CREATE TABLE Onduleur (
 ) ENGINE=InnoDB;
 
 -- Table: Marques
-CREATE TABLE Marques (
+CREATE TABLE Onduleur_Marques (
     id INT AUTO_INCREMENT PRIMARY KEY,
     nom CHAR(50) NOT NULL
+) ENGINE=InnoDB;
+
+CREATE TABLE Panneau_Marques (
+     id INT AUTO_INCREMENT PRIMARY KEY,
+     nom CHAR(50) NOT NULL
 ) ENGINE=InnoDB;
 
 -- Table: Installation
@@ -50,6 +55,8 @@ CREATE TABLE Installation (
     id INT AUTO_INCREMENT PRIMARY KEY,
     code_insee VARCHAR(6),
     id_installateur INT,
+    id_onduleur INT,
+    id_panneau INT,
     mois_installation INT,
     an_installation INT,
     puissance_crete INT,
@@ -62,32 +69,30 @@ CREATE TABLE Installation (
     lat FLOAT,
     lon FLOAT,
     FOREIGN KEY (code_insee) REFERENCES Locality(code_insee),
-    FOREIGN KEY (id_installateur) REFERENCES Installateur(id)
+    FOREIGN KEY (id_installateur) REFERENCES Installateur(id),
+    FOREIGN KEY (id_onduleur) REFERENCES Onduleur_Installe(id),
+    FOREIGN KEY (id_panneau) REFERENCES Panneau_Installe(id)
 ) ENGINE=InnoDB;
 
 
 -- Table: Panneaux_Installe (association Installation - Panneaux - Marques)
 CREATE TABLE Panneaux_Installe (
-    id_installation INT,
+    id INT AUTO_INCREMENT PRIMARY KEY,
     id_panneau INT,
     id_marque INT,
     nb INT,
-    PRIMARY KEY (id_installation, id_panneau, id_marque),
-    FOREIGN KEY (id_installation) REFERENCES Installation(id),
     FOREIGN KEY (id_panneau) REFERENCES Panneaux(id),
-    FOREIGN KEY (id_marque) REFERENCES Marques(id)
+    FOREIGN KEY (id_marque) REFERENCES Panneau_Marques(id)
 ) ENGINE=InnoDB;
 
 -- Table: Onduleur_Installe (association Installation - Onduleur - Marques)
 CREATE TABLE Onduleur_Installe (
-    id_installation INT,
+    id INT AUTO_INCREMENT PRIMARY KEY,
     id_onduleur INT,
     id_marque INT,
     nb INT,
-    PRIMARY KEY (id_installation, id_onduleur, id_marque),
-    FOREIGN KEY (id_installation) REFERENCES Installation(id),
     FOREIGN KEY (id_onduleur) REFERENCES Onduleur(id),
-    FOREIGN KEY (id_marque) REFERENCES Marques(id)
+    FOREIGN KEY (id_marque) REFERENCES Onduleur_Marques(id)
 ) ENGINE=InnoDB;
 
 

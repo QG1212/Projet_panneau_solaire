@@ -16,4 +16,12 @@ class OnduleursController
         $nb = Onduleurs::getNb($db);
         echo json_encode($nb);
     }
+
+    public static function getMarqueOnduleur() {
+        header('Content-Type: application/json');
+        $db = connexionDB();
+        $id_marque = $_GET['id_marque'];
+        $nb = Onduleurs::getMarqueOnduleur($db, $id_marque);
+        echo json_encode($nb);
+    }
 }

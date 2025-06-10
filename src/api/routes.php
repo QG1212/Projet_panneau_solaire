@@ -10,7 +10,7 @@ require_once 'controller/OnduleursController.php';
 require_once 'controller/PanneauxController.php';
 require_once 'controller/CommunesController.php';
 
-$routes = '/GitHub/Projet_panneau_solaire/src/api/index.php';
+$routes = '/Projet_panneau_solaire/src/api/index.php';
 
 Router::add('GET', $routes.'/onduleurs', ['OnduleursController', 'get20RandOnduleurs']);
 Router::add('GET', $routes.'/panneaux', ['PanneauxController', 'get20RandPanneaux']);
@@ -27,6 +27,10 @@ Router::add('GET', $routes.'/admin', ['UserController', 'getAdmin']);
 Router::add('GET', $routes.'/communes', ['CommunesController', 'getCommunes']);
 Router::add('GET', $routes.'/search', ['InstallationsController', 'searchInstallations']);
 Router::add('GET', $routes.'/installations', ['InstallationsController', 'getInstallations']);
+
+Router::add('GET', $routes.'/installation', ['InstallationsController', 'getInstallationsbyId']);
+Router::add('GET', $routes.'/marqueOnduleur', ['OnduleursController', 'getMarqueOnduleur']);
+Router::add('GET', $routes.'/marquePanneau', ['PanneauxController', 'getMarquePanneau']);
 
 Router::add('PUT', $routes.'/modifier', ['User', 'dbModifyDate']);
 Router::add('PUT', $routes.'/modifier', ['User', 'dbModifyPanneau']);

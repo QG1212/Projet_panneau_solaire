@@ -19,40 +19,82 @@ class Installations {
     }
 
     public static function search($db, $id_panneau, $id_onduleur, $id_dep) {
-        $stmt = $db->prepare("
-        SELECT * , oi.nb as nb_onduleur, pi.nb as nb_panneau 
-        FROM Installation i 
-        INNER JOIN Panneaux_Installe pi ON pi.id = i.id_panneau 
-        INNER JOIN Onduleur_Installe oi ON oi.id = i.id_onduleur 
-        INNER JOIN Locality l ON l.code_insee = i.code_insee 
-        INNER JOIN Departements d ON l.id_dep = d.id 
-        WHERE pi.id_marque = :id_panneau 
-          AND oi.id_marque = :id_onduleur 
-          AND d.id = :id_dep
-    ");
+        $conditions = [];
+        $params = [];
 
-        $stmt->bindParam(":id_panneau", $id_panneau, PDO::PARAM_INT);
-        $stmt->bindParam(":id_onduleur", $id_onduleur, PDO::PARAM_INT);
-        $stmt->bindParam(":id_dep", $id_dep, PDO::PARAM_INT);
+        if ($id_panneau != 0) {
+            $conditions[] = "pi.id_marque = :id_panneau";
+            $params[':id_panneau'] = $id_panneau;
+        }
+        if ($id_onduleur != 0) {
+            $conditions[] = "oi.id_marque = :id_onduleur";
+            $params[':id_onduleur'] = $id_onduleur;
+        }
+        if ($id_dep != 0) {
+            $conditions[] = "d.id = :id_dep";
+            $params[':id_dep'] = $id_dep;
+        }
+
+        $sql = "
+        SELECT *, i.id as id_installation, oi.nb as nb_onduleur, pi.nb as nb_panneau, oi.id_marque AS marque_onduleur, pi.id_marque AS marque_panneau
+        FROM Installation i
+        INNER JOIN Panneaux_Installe pi ON pi.id = i.id_panneau
+        INNER JOIN Onduleur_Installe oi ON oi.id = i.id_onduleur
+        INNER JOIN Locality l ON l.code_insee = i.code_insee
+        INNER JOIN Departements d ON l.id_dep = d.id
+    ";
+
+        if (count($conditions) > 0) {
+            $sql .= " WHERE " . implode(" AND ", $conditions);
+        }
+
+        $sql .= " LIMIT 100";
+
+        $stmt = $db->prepare($sql);
+
+        foreach ($params as $key => $value) {
+            $stmt->bindValue($key, $value, PDO::PARAM_INT);
+        }
 
         $stmt->execute();
+
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 
+
+
     public static function getInstallations($db) {
         $stmt = $db->prepare("
-        SELECT * , oi.nb as nb_onduleur, pi.nb as nb_panneau 
+        SELECT * , i.id as id_installation, oi.nb as nb_onduleur, pi.nb as nb_panneau
         FROM Installation i 
         INNER JOIN Panneaux_Installe pi ON pi.id = i.id_panneau 
         INNER JOIN Onduleur_Installe oi ON oi.id = i.id_onduleur 
         INNER JOIN Locality l ON l.code_insee = i.code_insee 
         INNER JOIN Departements d ON l.id_dep = d.id
+        INNER JOIN Installateur ir ON i.id_installateur = ir.id
         LIMIT 20;
     ");
         $stmt->execute();
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 
+    public static function getInstallationsbyId($db, $id) {
+        $stmt = $db->prepare("
+        SELECT * , i.id as id_installation, oi.nb as nb_onduleur, pi.nb as nb_panneau
+        FROM Installation i 
+        INNER JOIN Panneaux_Installe pi ON pi.id = i.id_panneau 
+        INNER JOIN Onduleur_Installe oi ON oi.id = i.id_onduleur 
+        INNER JOIN Locality l ON l.code_insee = i.code_insee 
+        INNER JOIN Departements d ON l.id_dep = d.id
+        INNER JOIN Installateur ir ON i.id_installateur = ir.id
+        WHERE i.id = :id
+    ");
+        $stmt->bindValue(":id", $id, PDO::PARAM_INT);
+        $stmt->execute();
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
+
 }
+
 
 ?>

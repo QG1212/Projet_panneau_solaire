@@ -4,7 +4,7 @@ function displayOnduleur(onduleurs){
     const div = document.getElementById('onduleur')
     onduleurs.forEach( onduleur =>{
        div.innerHTML += `
-       <option value="${parseInt('425')}">${onduleur.nom}</option>
+       <option value="${onduleur.id}">${onduleur.nom}</option>
        `
     });
 }
@@ -13,7 +13,7 @@ function displayPanneaux(panneaux){
     const div = document.getElementById('panneau')
     panneaux.forEach( panneau =>{
         div.innerHTML += `
-       <option value="${parseInt('5')}">${panneau.nom}</option>
+       <option value="${panneau.id}">${panneau.nom}</option>
        `
     });
 }
@@ -22,7 +22,7 @@ function displayDepartements(departements){
     const div = document.getElementById('departement')
     departements.forEach( departement =>{
         div.innerHTML += `
-       <option value="${parseInt('43')}">${departement.dep_nom}</option>
+       <option value="${departement.id}">${departement.dep_nom}</option>
        `
     });
 }
@@ -47,7 +47,7 @@ function displayTab(datas) {
             <td>${data.surface}</td>
             <td>${data.puissance_crete}</td>
             <td>${data.dep_nom}</td>
-            <td><a href="details.html"> Voir détails</a> </td>
+            <td><a href="details.html?id=${data.id_installation}&id_onduleur=${data.marque_onduleur}&id_panneau=${data.marque_panneau}"> Voir détails</a> </td>
         </tr>
        `
     });

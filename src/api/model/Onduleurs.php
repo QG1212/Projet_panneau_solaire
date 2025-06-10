@@ -9,4 +9,10 @@ class Onduleurs {
         $stmt = $db->query("SELECT COUNT(*) as nbOnduleurs FROM Onduleur;");
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
+    public static function getMarqueOnduleur($db, $id_marque) {
+        $stmt = $db->prepare("SELECT * FROM Marques WHERE id = :id_marque");
+        $stmt->bindValue(":id_marque", $id_marque, PDO::PARAM_INT);
+        $stmt->execute();
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
 }

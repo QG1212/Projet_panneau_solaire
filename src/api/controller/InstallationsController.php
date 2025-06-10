@@ -45,4 +45,13 @@ class InstallationsController
         $data = Installations::getInstallations($db);
         echo json_encode($data);
     }
+
+    public static function getInstallationsbyId() {
+        header('Content-Type: application/json');
+        $db = connexionDB();
+        $id = $_GET['id'];
+        $data = Installations::getInstallationsbyId($db, $id);
+        echo json_encode($data);
+    }
+
 }

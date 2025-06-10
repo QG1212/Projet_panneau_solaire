@@ -16,4 +16,12 @@ class PanneauxController
         $nb = Panneaux::getNb($db);
         echo json_encode($nb);
     }
+
+    public static function getMarquePanneau() {
+        header('Content-Type: application/json');
+        $db = connexionDB();
+        $id_marque = $_GET['id_marque'];
+        $nb = Panneaux::getMarquePanneau($db, $id_marque);
+        echo json_encode($nb);
+    }
 }
