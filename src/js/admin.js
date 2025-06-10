@@ -23,7 +23,7 @@ function displayInstallation(datas){
             </tr>
         `;
     });
-    attachDeleteHandlers(); // Attache les listeners après le rendu
+    attachDeleteHandlers();
 }
 
 function attachDeleteHandlers() {

@@ -157,37 +157,76 @@ class Installations {
         try {
             $db->beginTransaction();
 
-            // Update Onduleur_Installe
+            // 🔍 1. Récupération des anciennes valeurs
+            $stmtOld = $db->prepare("
+            SELECT 
+                I.*, 
+                OI.id_onduleur as old_id_onduleur, OI.id_marque as old_id_marque_onduleur, OI.nb as old_nb_onduleur,
+                PI.id_panneau as old_id_panneau, PI.id_marque as old_id_marque_panneau, PI.nb as old_nb_panneau
+            FROM Installation I
+            JOIN Onduleur_Installe OI ON OI.id = I.id_onduleur
+            JOIN Panneaux_Installe PI ON PI.id = I.id_panneau
+            WHERE I.id = :id
+        ");
+            $stmtOld->execute([':id' => $id_installation]);
+            $oldData = $stmtOld->fetch(PDO::FETCH_ASSOC);
+
+            if (!$oldData) {
+                throw new Exception("Installation introuvable.");
+            }
+
+            // 🛠 2. Si les nouvelles valeurs sont nulles, utiliser les anciennes
+            $code_insee        = $code_insee        ?: $oldData['code_insee'];
+            $id_installateur   = $id_installateur   ?: $oldData['id_installateur'];
+            $mois_installation = $mois_installation ?: $oldData['mois_installation'];
+            $an_installation   = $an_installation   ?: $oldData['an_installation'];
+            $puissance_crete   = $puissance_crete   ?: $oldData['puissance_crete'];
+            $surface           = $surface           ?: $oldData['surface'];
+            $lat               = $lat               ?: $oldData['lat'];
+            $lon               = $lon               ?: $oldData['lon'];
+
+            $id_onduleur       = $id_onduleur       ?: $oldData['old_id_onduleur'];
+            $id_marqueOnduleur = $id_marqueOnduleur ?: $oldData['old_id_marque_onduleur'];
+            $nb_Onduleur       = $nb_Onduleur       ?: $oldData['old_nb_onduleur'];
+
+            $id_panneau        = $id_panneau        ?: $oldData['old_id_panneau'];
+            $id_marquePanneau  = $id_marquePanneau  ?: $oldData['old_id_marque_panneau'];
+            $nb_Panneau        = $nb_Panneau        ?: $oldData['old_nb_panneau'];
+
+            // ✅ 3. Mise à jour des tables
+            // -- Onduleur_Installe
             $stmt1 = $db->prepare("
             UPDATE Onduleur_Installe 
             SET id_onduleur = :id_onduleur, id_marque = :id_marque, nb = :nb 
             WHERE id = :id
         ");
-            $stmt1->bindValue(":id_onduleur", $id_onduleur, PDO::PARAM_INT);
-            $stmt1->bindValue(":id_marque", $id_marqueOnduleur, PDO::PARAM_INT);
-            $stmt1->bindValue(":nb", $nb_Onduleur, PDO::PARAM_INT);
-            $stmt1->bindValue(":id", $id_onduleur_installe, PDO::PARAM_INT);
-            $stmt1->execute();
+            $stmt1->execute([
+                ":id_onduleur" => $id_onduleur,
+                ":id_marque"   => $id_marqueOnduleur,
+                ":nb"          => $nb_Onduleur,
+                ":id"          => $id_onduleur_installe,
+            ]);
 
-            // Update Panneaux_Installe
+            // -- Panneaux_Installe
             $stmt2 = $db->prepare("
             UPDATE Panneaux_Installe 
             SET id_panneau = :id_panneau, id_marque = :id_marque, nb = :nb 
             WHERE id = :id
         ");
-            $stmt2->bindValue(":id_panneau", $id_panneau, PDO::PARAM_INT);
-            $stmt2->bindValue(":id_marque", $id_marquePanneau, PDO::PARAM_INT);
-            $stmt2->bindValue(":nb", $nb_Panneau, PDO::PARAM_INT);
-            $stmt2->bindValue(":id", $id_panneaux_installe, PDO::PARAM_INT);
-            $stmt2->execute();
+            $stmt2->execute([
+                ":id_panneau" => $id_panneau,
+                ":id_marque"  => $id_marquePanneau,
+                ":nb"         => $nb_Panneau,
+                ":id"         => $id_panneaux_installe,
+            ]);
 
-            // Update Installation
+            // -- Installation
             $stmt3 = $db->prepare("
             UPDATE Installation SET
                 code_insee = :code_insee,
                 id_installateur = :id_installateur,
-                id_panneau = :id_panneau,
-                id_onduleur = :id_onduleur,
+                id_panneau = :id_panneaux_installe,
+                id_onduleur = :id_onduleur_installe,
                 mois_installation = :mois_installation,
                 an_installation = :an_installation,
                 puissance_crete = :puissance_crete,
@@ -201,26 +240,37 @@ class Installations {
                 lon = :lon
             WHERE id = :id
         ");
-            $stmt3->bindValue(":code_insee", $code_insee, PDO::PARAM_STR);
-            $stmt3->bindValue(":id_installateur", $id_installateur, PDO::PARAM_INT);
-            $stmt3->bindValue(":id_panneau", $id_panneaux_installe, PDO::PARAM_INT); // ici on passe l'id dans Panneaux_Installe
-            $stmt3->bindValue(":id_onduleur", $id_onduleur_installe, PDO::PARAM_INT);  // idem pour Onduleur_Installe
-            $stmt3->bindValue(":mois_installation", $mois_installation, PDO::PARAM_INT);
-            $stmt3->bindValue(":an_installation", $an_installation, PDO::PARAM_INT);
-            $stmt3->bindValue(":puissance_crete", $puissance_crete, PDO::PARAM_INT);
-            $stmt3->bindValue(":surface", $surface, PDO::PARAM_INT);
-            $stmt3->bindValue(":lat", $lat, PDO::PARAM_STR);
-            $stmt3->bindValue(":lon", $lon, PDO::PARAM_STR);
-            $stmt3->bindValue(":id", $id_installation, PDO::PARAM_INT);
-            $stmt3->execute();
+            $stmt3->execute([
+                ":code_insee"          => $code_insee,
+                ":id_installateur"     => $id_installateur,
+                ":id_panneaux_installe"=> $id_panneaux_installe,
+                ":id_onduleur_installe"=> $id_onduleur_installe,
+                ":mois_installation"   => $mois_installation,
+                ":an_installation"     => $an_installation,
+                ":puissance_crete"     => $puissance_crete,
+                ":surface"             => $surface,
+                ":lat"                 => $lat,
+                ":lon"                 => $lon,
+                ":id"                  => $id_installation,
+            ]);
 
             $db->commit();
-            echo json_encode("Mise à jour réussie !");
+            http_response_code(200);
+            echo json_encode([
+                'status' => 'success',
+                'message' => 'Mise à jour réussie !'
+            ]);
         } catch (Exception $e) {
             $db->rollBack();
-            echo json_encode("Échec de la mise à jour : " . $e->getMessage());
+            http_response_code(500);
+            echo json_encode([
+                'status' => 'error',
+                'message' => 'Échec de la mise à jour : ' . $e->getMessage()
+            ]);
         }
     }
+
+
 
     public static function delete($db, $id){
         $stmt = $db->prepare("DELETE FROM Installation WHERE id = :id");
